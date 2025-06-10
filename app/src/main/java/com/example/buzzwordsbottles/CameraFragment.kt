@@ -41,6 +41,13 @@ class CameraFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Calls to start the camera for the fragment and starts a thread to analyse each camera frame for text
+     *
+     * @param view
+     * @param savedInstanceState
+     */
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -50,6 +57,12 @@ class CameraFragment : Fragment() {
         cameraExecutor = Executors.newSingleThreadExecutor()
 
     }
+
+    /**
+     * Starts the camera for the application and calls
+     * the analysis of each frame whilst the camera is opened
+     *
+     */
 
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
@@ -74,6 +87,12 @@ class CameraFragment : Fragment() {
             cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
         }, ContextCompat.getMainExecutor(requireContext()))
     }
+
+    /**
+     * Calls the usual shut down of the application but adds a shutdown of the camera thread when the
+     * fragment is destroyed
+     *
+     */
 
     override fun onDestroy() {
         super.onDestroy()

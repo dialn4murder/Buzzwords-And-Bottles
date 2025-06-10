@@ -9,10 +9,20 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 
+/**
+ * TextAnalyzer will analyse each frame for text which will be used to scrape websites for descriptions
+ *
+ */
+
 class TextAnalyzer : ImageAnalysis.Analyzer {
     // Initialises ML Kit
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
 
+    /**
+     * Analyzes the image and prints the text of each frame
+     *
+     * @param imageProxy frame to be analysed
+     */
     @OptIn(ExperimentalGetImage::class)
     override fun analyze(imageProxy: ImageProxy) {
         val mediaImage = imageProxy.image ?: return
