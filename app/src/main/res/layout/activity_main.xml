@@ -25,12 +25,12 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_center"
         app:shapeAppearance="@style/Widget.Material3.CircularProgressIndicator"
-        app:fabSize="auto"
+        app:fabCustomSize="80dp"
+        app:maxImageSize="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/add"
-        android:layout_marginBottom="78dp"
-
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_container"
         app:layout_constraintEnd_toEndOf="@+id/bottom_navigation"
         app:layout_constraintStart_toStartOf="parent"
