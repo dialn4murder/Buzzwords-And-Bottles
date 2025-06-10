@@ -6,4 +6,12 @@
     </style>
 
     <style name="Theme.BuzzwordsBottles" parent="Base.Theme.BuzzwordsBottles" />
+
+<!--    <style name="ThemeOverlay.Material3Expressive.FloatingActionButton.PrimaryContainer" parent="">-->
+<!--        <item name="backgroundTint">@color/your_custom_color</item>-->
+<!--    </style>-->
+
+<!--    <style name="Widget.Material3Expressive.FloatingActionButton.Large" parent="Base.Widget.Material3.FloatingActionButton.Large">-->
+<!--        <item name="materialThemeOverlay">@style/ThemeOverlay.Material3Expressive.FloatingActionButton.PrimaryContainer</item>-->
+<!--    </style>-->
 </resources>
