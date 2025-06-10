@@ -31,7 +31,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkCameraPermission()
-        
+
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when(item.itemId) {
+                R.id.camera -> {
+                    replaceFragment(CameraFragment())
+                    true
+                }
+                R.id.description_list -> {
+                    replaceFragment(DescriptionsFragment())
+                    true
+                }
+                else -> false
+            }
+
+        }
+
     }
 
     private fun checkCameraPermission() {
@@ -61,9 +76,4 @@ class MainActivity : AppCompatActivity() {
             commit()
         }
     }
-
-
-    
-
-
 }
