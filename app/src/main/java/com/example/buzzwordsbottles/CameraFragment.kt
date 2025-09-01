@@ -23,6 +23,10 @@ class CameraFragment : Fragment() {
 
     private lateinit var cameraExecutor: ExecutorService
 
+    private var cameraProvider: ProcessCameraProvider? = null
+    private val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    private var preview: Preview? = null
+
     /**
      * Gives binding something to bind to while creating the fragment
      *
@@ -75,16 +79,16 @@ class CameraFragment : Fragment() {
                 it.surfaceProvider = binding.cameraView.surfaceProvider
             }
 
-            // Analyzes each camera frame and calls TextAnalyzer
-            val imageAnalyzer = ImageAnalysis.Builder().build().also {
-                it.setAnalyzer(cameraExecutor, TextAnalyzer())
-            }
+//            // Analyzes each camera frame and calls TextAnalyzer
+//            val imageAnalyzer = ImageAnalysis.Builder().build().also {
+//                it.setAnalyzer(cameraExecutor, TextAnalyzer())
+//            }
 
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             cameraProvider.unbindAll()
             // Binds camera to the lifecycle
-            cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
+            cameraProvider.bindToLifecycle(this, cameraSelector, preview)
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
@@ -93,6 +97,18 @@ class CameraFragment : Fragment() {
      * fragment is destroyed
      *
      */
+
+    fun analyseOnPress(){
+
+        val imageAnalyzer = ImageAnalysis.Builder().build().also {
+            it.setAnalyzer(cameraExecutor, TextAnalyzer())
+        }
+
+        cameraProvider?.unbindAll()
+
+        // Re-bind preview + analyzer together
+        cameraProvider?.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
