@@ -42,11 +42,20 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(DescriptionsFragment())
                     true
                 }
+                R.id.fab_center -> {
+                    launchAnalysis()
+                    true
+                }
                 else -> false
             }
 
         }
 
+    }
+
+    private fun launchAnalysis(){
+        val fragment = supportFragmentManager.findFragmentByTag("cameraFragment") as? CameraFragment
+        fragment?.analyseOnPress()
     }
 
     private fun checkCameraPermission() {
