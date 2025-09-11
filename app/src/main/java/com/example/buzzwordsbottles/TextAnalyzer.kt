@@ -17,6 +17,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 class TextAnalyzer : ImageAnalysis.Analyzer {
     // Initialises ML Kit
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+    private var toggle = false
 
     /**
      * Analyzes the image and prints the text of each frame
@@ -25,6 +26,11 @@ class TextAnalyzer : ImageAnalysis.Analyzer {
      */
     @OptIn(ExperimentalGetImage::class)
     override fun analyze(imageProxy: ImageProxy) {
+
+        if (toggle){
+            imageProxy.close()
+        }
+
         val mediaImage = imageProxy.image ?: return
         val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
@@ -33,12 +39,13 @@ class TextAnalyzer : ImageAnalysis.Analyzer {
                 for (block in visionText.textBlocks) {
                     Log.d("Scanned Text", block.text)
                 }
+                toggle = true
             }
             .addOnFailureListener { e ->
                 Log.e("Text Error", "Error recognizing text", e)
             }
             .addOnCompleteListener {
-                imageProxy.close()
+
             }
     }
 }
