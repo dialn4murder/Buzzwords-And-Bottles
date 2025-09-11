@@ -1,6 +1,7 @@
 package com.example.buzzwordsbottles
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,8 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class CameraFragment : Fragment() {
+class CameraFragment : Fragment(), CameraListener {
+
     /**
      * Initialises binding for login fragment
      */
@@ -23,8 +25,8 @@ class CameraFragment : Fragment() {
 
     private lateinit var cameraExecutor: ExecutorService
 
-    private var cameraProvider: ProcessCameraProvider? = null
-    private val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    private lateinit var cameraProvider: ProcessCameraProvider
+    private var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var preview: Preview? = null
 
     /**
@@ -55,10 +57,10 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        startCamera()
-
         // Thread to analyse each camera frame
         cameraExecutor = Executors.newSingleThreadExecutor()
+
+        startCamera()
 
     }
 
@@ -72,10 +74,10 @@ class CameraFragment : Fragment() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
-            val cameraProvider = cameraProviderFuture.get()
+            cameraProvider = cameraProviderFuture.get()
 
             // Builds camera preview
-            val preview = Preview.Builder().build().also {
+            preview = Preview.Builder().build().also {
                 it.surfaceProvider = binding.cameraView.surfaceProvider
             }
 
@@ -84,7 +86,7 @@ class CameraFragment : Fragment() {
 //                it.setAnalyzer(cameraExecutor, TextAnalyzer())
 //            }
 
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+            cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             cameraProvider.unbindAll()
             // Binds camera to the lifecycle
@@ -98,16 +100,19 @@ class CameraFragment : Fragment() {
      *
      */
 
-    fun analyseOnPress(){
+    override fun analyseOnPress(){
+
+        Log.d("Scanned Text", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+
 
         val imageAnalyzer = ImageAnalysis.Builder().build().also {
             it.setAnalyzer(cameraExecutor, TextAnalyzer())
         }
 
-        cameraProvider?.unbindAll()
+        cameraProvider.unbindAll()
 
         // Re-bind preview + analyzer together
-        cameraProvider?.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
+        cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
     }
 
     override fun onDestroy() {
