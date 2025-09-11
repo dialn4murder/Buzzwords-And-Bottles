@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import android.Manifest
+import android.content.Intent
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
 
+
+
         setContentView(view)
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -32,18 +35,24 @@ class MainActivity : AppCompatActivity() {
 
         checkCameraPermission()
 
+
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.camera -> {
-                    replaceFragment(CameraFragment())
+                    replaceFragment(CameraFragment(), "cameraFragment")
                     true
                 }
                 R.id.description_list -> {
-                    replaceFragment(DescriptionsFragment())
+                    replaceFragment(DescriptionsFragment(),"descriptionFragment")
                     true
                 }
                 R.id.fab_center -> {
-                    launchAnalysis()
+                    val fragment = CameraFragment().apply {
+                        arguments = Bundle().apply {
+                            putBoolean("cameraOnPress", true)
+                        }
+                    }
+                    replaceFragment(fragment, "cameraFragment")
                     true
                 }
                 else -> false
@@ -54,8 +63,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun launchAnalysis(){
+        val bundle = Bundle()
+        bundle.putBoolean("cameraOnPress", true)
         val fragment = supportFragmentManager.findFragmentByTag("cameraFragment") as? CameraFragment
-        fragment?.analyseOnPress()
+        fragment?.arguments = bundle
+
     }
 
     private fun checkCameraPermission() {
@@ -63,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             == PackageManager.PERMISSION_GRANTED
         ) {
-            replaceFragment(CameraFragment())
+            replaceFragment(CameraFragment(), "cameraFragment")
         // Requests camera permissions while the app is running
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 101)
@@ -79,9 +91,9 @@ class MainActivity : AppCompatActivity() {
      */
 
     // Replace fragment in container
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment, tag: String) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment_container, fragment)
+            replace(R.id.fragment_container, fragment, tag)
             commit()
         }
     }
