@@ -44,23 +44,13 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(DescriptionsFragment(),"descriptionFragment")
                     true
                 }
-//                R.id.fab_center -> {
-//                    Log.d("Scanned Text", "BBBBBBBBBBBBBBBBBBBBBBBBB")
-//
-//                    val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-//                    if (fragment is CameraListener){
-//                        fragment.analyseOnPress()
-//                    }
-//                    true
-//                }
+
                 else -> false
             }
 
         }
 
         binding.fabCenter.setOnClickListener {
-            Log.d("Scanned Text", "BBBBBBBBBBBBBBBBBBBBBBBBB")
-
             val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
             if (fragment is CameraListener){
                 fragment.analyseOnPress()

@@ -102,9 +102,6 @@ class CameraFragment : Fragment(), CameraListener {
 
     override fun analyseOnPress(){
 
-        Log.d("Scanned Text", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-
-
         val imageAnalyzer = ImageAnalysis.Builder().build().also {
             it.setAnalyzer(cameraExecutor, TextAnalyzer())
         }
