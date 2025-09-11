@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import android.Manifest
+import android.content.Intent
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -35,27 +37,36 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.camera -> {
-                    replaceFragment(CameraFragment())
+                    replaceFragment(CameraFragment(), "cameraFragment")
                     true
                 }
                 R.id.description_list -> {
-                    replaceFragment(DescriptionsFragment())
+                    replaceFragment(DescriptionsFragment(),"descriptionFragment")
                     true
                 }
-                R.id.fab_center -> {
-                    launchAnalysis()
-                    true
-                }
+//                R.id.fab_center -> {
+//                    Log.d("Scanned Text", "BBBBBBBBBBBBBBBBBBBBBBBBB")
+//
+//                    val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+//                    if (fragment is CameraListener){
+//                        fragment.analyseOnPress()
+//                    }
+//                    true
+//                }
                 else -> false
             }
 
         }
 
-    }
+        binding.fabCenter.setOnClickListener {
+            Log.d("Scanned Text", "BBBBBBBBBBBBBBBBBBBBBBBBB")
 
-    private fun launchAnalysis(){
-        val fragment = supportFragmentManager.findFragmentByTag("cameraFragment") as? CameraFragment
-        fragment?.analyseOnPress()
+            val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            if (fragment is CameraListener){
+                fragment.analyseOnPress()
+            }
+        }
+
     }
 
     private fun checkCameraPermission() {
@@ -63,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             == PackageManager.PERMISSION_GRANTED
         ) {
-            replaceFragment(CameraFragment())
+            replaceFragment(CameraFragment(), "cameraFragment")
         // Requests camera permissions while the app is running
         } else {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 101)
@@ -79,9 +90,9 @@ class MainActivity : AppCompatActivity() {
      */
 
     // Replace fragment in container
-    private fun replaceFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment, tag: String) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fragment_container, fragment)
+            replace(R.id.fragment_container, fragment, tag)
             commit()
         }
     }
