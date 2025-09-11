@@ -16,7 +16,8 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class CameraFragment : Fragment() {
+class CameraFragment : Fragment(), CameraListener {
+
     /**
      * Initialises binding for login fragment
      */
@@ -56,16 +57,10 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        startCamera()
-
-        val shouldAnalyse = arguments?.getBoolean("cameraOnPress", false) ?: false
-        if (shouldAnalyse) {
-            analyseOnPress()
-            arguments?.putBoolean("cameraOnPress", false) // reset
-        }
-
         // Thread to analyse each camera frame
         cameraExecutor = Executors.newSingleThreadExecutor()
+
+        startCamera()
 
     }
 
@@ -105,7 +100,7 @@ class CameraFragment : Fragment() {
      *
      */
 
-    fun analyseOnPress(){
+    override fun analyseOnPress(){
 
         Log.d("Scanned Text", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 

@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import android.Manifest
 import android.content.Intent
+import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -24,8 +25,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
 
-
-
         setContentView(view)
         ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -34,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkCameraPermission()
-
 
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when(item.itemId) {
@@ -46,27 +44,28 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(DescriptionsFragment(),"descriptionFragment")
                     true
                 }
-                R.id.fab_center -> {
-                    val fragment = CameraFragment().apply {
-                        arguments = Bundle().apply {
-                            putBoolean("cameraOnPress", true)
-                        }
-                    }
-                    replaceFragment(fragment, "cameraFragment")
-                    true
-                }
+//                R.id.fab_center -> {
+//                    Log.d("Scanned Text", "BBBBBBBBBBBBBBBBBBBBBBBBB")
+//
+//                    val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+//                    if (fragment is CameraListener){
+//                        fragment.analyseOnPress()
+//                    }
+//                    true
+//                }
                 else -> false
             }
 
         }
 
-    }
+        binding.fabCenter.setOnClickListener {
+            Log.d("Scanned Text", "BBBBBBBBBBBBBBBBBBBBBBBBB")
 
-    private fun launchAnalysis(){
-        val bundle = Bundle()
-        bundle.putBoolean("cameraOnPress", true)
-        val fragment = supportFragmentManager.findFragmentByTag("cameraFragment") as? CameraFragment
-        fragment?.arguments = bundle
+            val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            if (fragment is CameraListener){
+                fragment.analyseOnPress()
+            }
+        }
 
     }
 
