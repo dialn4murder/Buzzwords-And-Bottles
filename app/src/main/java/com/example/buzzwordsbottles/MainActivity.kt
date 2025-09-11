@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         // Fab requires its own onClickListener
         binding.fabCenter.setOnClickListener {
-            val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            val fragment = supportFragmentManager.findFragmentByTag("cameraFragment")
             // Checks if fragment has interface
             if (fragment is CameraListener){
                 // calls the current frame to be analyzed
