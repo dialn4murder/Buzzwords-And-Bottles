@@ -27,6 +27,7 @@ class TextAnalyzer : ImageAnalysis.Analyzer {
     @OptIn(ExperimentalGetImage::class)
     override fun analyze(imageProxy: ImageProxy) {
 
+        // Checks if analysis has finished
         if (toggle){
             imageProxy.close()
         }

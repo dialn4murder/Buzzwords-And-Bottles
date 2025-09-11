@@ -24,7 +24,6 @@ class CameraFragment : Fragment(), CameraListener {
     private lateinit var binding: FragmentCameraBinding
 
     private lateinit var cameraExecutor: ExecutorService
-
     private lateinit var cameraProvider: ProcessCameraProvider
     private var cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var preview: Preview? = null
@@ -60,6 +59,7 @@ class CameraFragment : Fragment(), CameraListener {
         // Thread to analyse each camera frame
         cameraExecutor = Executors.newSingleThreadExecutor()
 
+        // Starts the camera
         startCamera()
 
     }
@@ -74,6 +74,7 @@ class CameraFragment : Fragment(), CameraListener {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
+            // manages opening the camera
             cameraProvider = cameraProviderFuture.get()
 
             // Builds camera preview
@@ -81,11 +82,7 @@ class CameraFragment : Fragment(), CameraListener {
                 it.surfaceProvider = binding.cameraView.surfaceProvider
             }
 
-//            // Analyzes each camera frame and calls TextAnalyzer
-//            val imageAnalyzer = ImageAnalysis.Builder().build().also {
-//                it.setAnalyzer(cameraExecutor, TextAnalyzer())
-//            }
-
+            // Defines which camera to use
             cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             cameraProvider.unbindAll()
@@ -102,16 +99,19 @@ class CameraFragment : Fragment(), CameraListener {
 
     override fun analyseOnPress(){
 
+        // Starts analysis by calling the TextAnalyzer class and binds it to cameraExecutor
         val imageAnalyzer = ImageAnalysis.Builder().build().also {
             it.setAnalyzer(cameraExecutor, TextAnalyzer())
         }
 
+        // Unbinds everything from camera provider to be re-bound
         cameraProvider.unbindAll()
 
         // Re-bind preview + analyzer together
         cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalyzer)
     }
 
+    // Overrides onDestroy to ensure that camera shuts down with the fragment
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
