@@ -33,6 +33,7 @@ class TextAnalyzer(private val listener: ScannedTextListener) : ImageAnalysis.An
             imageProxy.close()
         }
 
+        // Current frame to be analyzed
         val mediaImage = imageProxy.image ?: return
         val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
@@ -43,9 +44,11 @@ class TextAnalyzer(private val listener: ScannedTextListener) : ImageAnalysis.An
                     text += block.text
                     Log.d("Scanned Text", block.text)
                 }
+                // Ends analysis and sends the text to the interface
                 listener.textFound(text)
                 toggle = true
             }
+            // Catches any failure in finding the text
             .addOnFailureListener { e ->
                 Log.e("Text Error", "Error recognizing text", e)
             }

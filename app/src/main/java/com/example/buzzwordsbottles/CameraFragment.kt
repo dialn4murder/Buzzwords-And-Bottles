@@ -120,6 +120,7 @@ class CameraFragment : Fragment(), CameraListener, ScannedTextListener {
         cameraExecutor.shutdown()
     }
 
+    // Handles the text found by the camera
     override fun textFound(text: String) {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show()
     }
