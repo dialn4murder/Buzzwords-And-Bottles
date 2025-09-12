@@ -14,7 +14,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions
  *
  */
 
-class TextAnalyzer : ImageAnalysis.Analyzer {
+class TextAnalyzer(private val listener: ScannedTextListener) : ImageAnalysis.Analyzer {
     // Initialises ML Kit
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
     private var toggle = false
@@ -37,9 +37,12 @@ class TextAnalyzer : ImageAnalysis.Analyzer {
 
         recognizer.process(image)
             .addOnSuccessListener { visionText ->
+                var text = ""
                 for (block in visionText.textBlocks) {
+                    text += block.text
                     Log.d("Scanned Text", block.text)
                 }
+                listener.textFound(text)
                 toggle = true
             }
             .addOnFailureListener { e ->

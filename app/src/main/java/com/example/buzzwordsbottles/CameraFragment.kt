@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -16,7 +17,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class CameraFragment : Fragment(), CameraListener {
+class CameraFragment : Fragment(), CameraListener, ScannedTextListener {
 
     /**
      * Initialises binding for login fragment
@@ -101,7 +102,7 @@ class CameraFragment : Fragment(), CameraListener {
 
         // Starts analysis by calling the TextAnalyzer class and binds it to cameraExecutor
         val imageAnalyzer = ImageAnalysis.Builder().build().also {
-            it.setAnalyzer(cameraExecutor, TextAnalyzer())
+            it.setAnalyzer(cameraExecutor, TextAnalyzer(this))
         }
 
         // Unbinds everything from camera provider to be re-bound
@@ -115,6 +116,10 @@ class CameraFragment : Fragment(), CameraListener {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
+    }
+
+    override fun textFound(text: String) {
+        Toast.makeText(context, text, Toast.LENGTH_LONG).show()
     }
 
 }
