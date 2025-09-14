@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buzzwordsbottles.adapters.DescriptionAdapter
-import com.example.buzzwordsbottles.databinding.FragmentCameraBinding
+import com.example.buzzwordsbottles.databinding.FragmentDescriptionsBinding
 
 
 class DescriptionsFragment : Fragment() {
     /**
      * Initialises binding for login fragment
      */
-    private lateinit var binding: FragmentCameraBinding
+    private lateinit var binding: FragmentDescriptionsBinding
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var adapter: DescriptionAdapter
 
@@ -24,7 +24,7 @@ class DescriptionsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCameraBinding.inflate(layoutInflater)
+        binding = FragmentDescriptionsBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         return binding.root
     }
@@ -34,11 +34,11 @@ class DescriptionsFragment : Fragment() {
 
         layoutManager = LinearLayoutManager(context)
 
-//        binding.
-//
-//        // Initialises the adapter and recycler view
-//        binding.gamesRecyclerView.layoutManager = layoutManager
-//        adapter = RecyclerAdapter(this)
-//        binding.gamesRecyclerView.adapter = adapter
+
+        // Initialises the adapter and recycler view
+        binding.descriptionRv.layoutManager = layoutManager
+        adapter = DescriptionAdapter()
+        binding.descriptionRv.adapter = adapter
+
     }
 }
