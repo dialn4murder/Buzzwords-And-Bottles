@@ -10,7 +10,6 @@ import com.example.buzzwordsbottles.databinding.DescriptionLayoutBinding
 
 class DescriptionAdapter : RecyclerView.Adapter<DescriptionAdapter.ViewHolder>() {
     var list = mutableListOf<Descriptions>()
-
     init {
 
 
