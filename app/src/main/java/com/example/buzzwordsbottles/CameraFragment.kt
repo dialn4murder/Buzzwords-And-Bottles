@@ -1,12 +1,10 @@
 package com.example.buzzwordsbottles
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
@@ -15,6 +13,8 @@ import androidx.core.content.ContextCompat
 import com.example.buzzwordsbottles.databinding.FragmentCameraBinding
 import com.example.buzzwordsbottles.interfaces.CameraListener
 import com.example.buzzwordsbottles.interfaces.ScannedTextListener
+import com.example.buzzwordsbottles.classes.SharedViewModel
+import androidx.fragment.app.activityViewModels
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -25,6 +25,8 @@ class CameraFragment : Fragment(), CameraListener, ScannedTextListener {
      * Initialises binding for login fragment
      */
     private lateinit var binding: FragmentCameraBinding
+
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var cameraProvider: ProcessCameraProvider
@@ -122,7 +124,7 @@ class CameraFragment : Fragment(), CameraListener, ScannedTextListener {
 
     // Handles the text found by the camera
     override fun textFound(text: String) {
-        Toast.makeText(context, text, Toast.LENGTH_LONG).show()
+        sharedViewModel.setScannedText(text)
     }
 
 }
