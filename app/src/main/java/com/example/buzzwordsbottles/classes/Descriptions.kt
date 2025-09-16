@@ -1,4 +1,4 @@
 package com.example.buzzwordsbottles.classes
 
-class Descriptions {
+class Descriptions(var description: String) {
 }

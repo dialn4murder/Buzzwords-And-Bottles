@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buzzwordsbottles.adapters.DescriptionAdapter
+import com.example.buzzwordsbottles.classes.Descriptions
 import com.example.buzzwordsbottles.databinding.FragmentDescriptionsBinding
 
 
@@ -39,6 +40,11 @@ class DescriptionsFragment : Fragment() {
         binding.descriptionRv.layoutManager = layoutManager
         adapter = DescriptionAdapter()
         binding.descriptionRv.adapter = adapter
+
+        adapter.addItem(Descriptions("asafegf"))
+        adapter.addItem(Descriptions("dsrhjth"))
+        adapter.addItem(Descriptions("kxvnodfjbn"))
+
 
     }
 }

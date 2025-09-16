@@ -10,6 +10,7 @@ import com.example.buzzwordsbottles.databinding.DescriptionLayoutBinding
 
 class DescriptionAdapter : RecyclerView.Adapter<DescriptionAdapter.ViewHolder>() {
     var list = mutableListOf<Descriptions>()
+
     init {
 
 
@@ -17,6 +18,8 @@ class DescriptionAdapter : RecyclerView.Adapter<DescriptionAdapter.ViewHolder>()
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
         val binding = DescriptionLayoutBinding.bind(itemView)
+
+        // Click functionality
         init {
 //            itemView.setOnClickListener{
 //
@@ -38,6 +41,12 @@ class DescriptionAdapter : RecyclerView.Adapter<DescriptionAdapter.ViewHolder>()
         val cardView = holder.binding
         val item = list[position]
 
+        list.add(Descriptions("asafegf"))
+        list.add(Descriptions("dsrhjth"))
+        list.add(Descriptions("kxvnodfjbn"))
+
+
+        cardView.description.text = item.description
 //        val normalPrice = item.normalPrice.toString()
 //        val salePrice = item.salePrice.toString()
 //
