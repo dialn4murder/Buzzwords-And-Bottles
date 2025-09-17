@@ -36,18 +36,16 @@ class DescriptionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialises type of layout
         layoutManager = LinearLayoutManager(context)
-
 
         // Initialises the adapter and recycler view
         binding.descriptionRv.layoutManager = layoutManager
         adapter = DescriptionAdapter()
         binding.descriptionRv.adapter = adapter
 
-        adapter.addItem(Descriptions("asafegf"))
-        adapter.addItem(Descriptions("dsrhjth"))
-        adapter.addItem(Descriptions("kxvnodfjbn"))
 
+        // Adds the scanned data to the recycler view
         sharedViewModel.scannedText.observe(viewLifecycleOwner) { text ->
             adapter.addItem(Descriptions(text))
         }
