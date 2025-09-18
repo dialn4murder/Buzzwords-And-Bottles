@@ -1,3 +1,25 @@
-Android studio project which uses CameraX and Googles ML Kit to scan and store descriptions based off a label.
 
-Currently stores scanned words in a recycler view
+# Buzzwords and Bottles
+
+Android application that scans labels of wine, beer or other stuff and creates or finds a description of the product
+
+
+## Tech Used
+
+**Client:** Kotlin, Android Studio, Google ML Kit, CameraX
+
+The app uses fragments for all implementation which launches the descriptions list and camera allowing for neater and maintanable code. The descriptions page uses a RecyclerView for efficiency, scalability and customizability compared to alternatives.
+
+CameraX is whats used for the camera due to its flexability and additional functionality if needed in the future. Google ML kit is a machine learning tool which is used to detect words on a button press from the camera and works well with CameraX.
+## Lessons Learned
+
+I learned more complex ideas within android studio such as CameraX and Googles ML Kit.
+ I've learned more about sending data between fragments using SharedViewModels rather than bundles and more advanced Kotlin ideas such as interfaces through development of this app.
+
+Roadblocks were overcome during development such as the FAB button not working which was noticed when the button was not outputting anything. Initally thinking that the function was at fault but later realising after debugging the button was setup incorrectly. This taught me to take a step back and have a broader scope of debugging allowing me to find the cause of bugs faster.
+
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dylan-champion/)
+[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/dialn4murder)
+
