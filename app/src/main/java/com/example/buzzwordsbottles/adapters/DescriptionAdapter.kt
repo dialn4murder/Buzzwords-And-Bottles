@@ -40,10 +40,6 @@ class DescriptionAdapter : RecyclerView.Adapter<DescriptionAdapter.ViewHolder>()
         val cardView = holder.binding
         val item = list[position]
 
-        list.add(Descriptions("asafegf"))
-        list.add(Descriptions("dsrhjth"))
-        list.add(Descriptions("kxvnodfjbn"))
-
 
         cardView.description.text = item.description
 //        val normalPrice = item.normalPrice.toString()

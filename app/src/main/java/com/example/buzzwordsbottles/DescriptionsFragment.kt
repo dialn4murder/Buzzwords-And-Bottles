@@ -46,9 +46,12 @@ class DescriptionsFragment : Fragment() {
 
 
         // Adds the scanned data to the recycler view
-        sharedViewModel.scannedText.observe(viewLifecycleOwner) { text ->
-            adapter.addItem(Descriptions(text))
+
+        sharedViewModel.scannedText.forEach {
+            adapter.addItem(it)
         }
+
+        adapter.addItem(Descriptions("asfbgd"))
 
 
     }
