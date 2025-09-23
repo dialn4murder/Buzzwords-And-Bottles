@@ -16,7 +16,7 @@ CameraX is whats used for the camera due to its flexability and additional funct
 I learned more complex ideas within android studio such as CameraX and Googles ML Kit.
  I've learned more about sending data between fragments using SharedViewModels rather than bundles and more advanced Kotlin ideas such as interfaces through development of this app.
 
-Roadblocks were overcome during development such as the FAB button not working which was noticed when the button was not outputting anything. Initally thinking that the function was at fault but later realising after debugging the button was setup incorrectly. This taught me to take a step back and have a broader scope of debugging allowing me to find the cause of bugs faster.
+Roadblocks were overcome during development such as the FAB button not working which was noticed when the button was not outputting anything. Initally thinking that the function was at fault but later realising after debugging the button was setup incorrectly. What this taught me was to focus on simple, easily correctable possible reasons for bugs then move onto larger reasons for the bug to save time on more complex solutions.
 
 
 ## 🔗 Links
