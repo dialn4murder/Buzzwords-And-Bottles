@@ -7,6 +7,10 @@ android {
     namespace = "com.example.buzzwordsbottles"
     compileSdk = 35
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
+    }
+
     defaultConfig {
         applicationId = "com.example.buzzwordsbottles"
         minSdk = 24
@@ -52,7 +56,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation("androidx.compose.material:material-icons-core")
     implementation("androidx.compose.material:material-icons-extended")
-    implementation("androidx.compose.material3.adaptive:adaptive")
 
     implementation("androidx.fragment:fragment-ktx:1.8.9")
     implementation (libs.androidx.camera.core)
