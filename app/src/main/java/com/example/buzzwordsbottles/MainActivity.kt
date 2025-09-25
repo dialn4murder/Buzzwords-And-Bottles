@@ -26,6 +26,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 
 class MainActivity : ComponentActivity() {
@@ -35,7 +37,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            BottomAppBarExample()
+            Scaffold(
+                bottomBar = { BottomAppBarExample(rememberNavController()) }
+            ) { innerPadding ->
+                NavHost()
+            }
         }
 
         checkCameraPermission()
@@ -55,15 +61,15 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun BottomAppBarExample() {
+    fun BottomAppBarExample(navController: NavHostController) {
         Scaffold(
             bottomBar = {
                 BottomAppBar(
                     actions = {
-                        IconButton(onClick = { /* do something */ }) {
+                        IconButton(onClick = { navController.navigate("camera") }) {
                             Icon(Icons.Filled.CameraAlt, contentDescription = "Localized description")
                         }
-                        IconButton(onClick = { /* do something */ }) {
+                        IconButton(onClick = { navController.navigate("descriptions") }) {
                             Icon(
                                 Icons.AutoMirrored.Filled.FormatListBulleted,
                                 contentDescription = "Localized description",
