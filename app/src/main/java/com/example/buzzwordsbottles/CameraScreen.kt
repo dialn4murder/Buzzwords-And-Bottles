@@ -1,4 +1,10 @@
 package com.example.buzzwordsbottles
 
-class CameraScreen {
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+
+@Composable
+fun CameraScreen(){
+    Text(text = "AAAAAAAAAAAAAAAAAAAAAAAA")
+
 }

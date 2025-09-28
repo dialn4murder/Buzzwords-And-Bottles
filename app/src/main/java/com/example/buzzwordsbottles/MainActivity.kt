@@ -3,10 +3,7 @@ package com.example.buzzwordsbottles
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import android.Manifest
-import android.content.Intent
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.padding
@@ -39,9 +36,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             Scaffold(
-                bottomBar = { BottomAppBarExample(navController) }
+                bottomBar = { BottomAppBar(navController) }
             ) { innerPadding ->
-                NavHost(navController)
+                Navigation(navController)
             }
         }
 
@@ -60,42 +57,5 @@ class MainActivity : ComponentActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 101)
         }
     }
-
-    @Composable
-    fun BottomAppBarExample(navController: NavHostController) {
-        Scaffold(
-            bottomBar = {
-                BottomAppBar(
-                    actions = {
-                        IconButton(onClick = { navController.navigate("camera") }) {
-                            Icon(Icons.Filled.CameraAlt, contentDescription = "Localized description")
-                        }
-                        IconButton(onClick = { navController.navigate("descriptions") }) {
-                            Icon(
-                                Icons.AutoMirrored.Filled.FormatListBulleted,
-                                contentDescription = "Localized description",
-                            )
-                        }
-                    },
-                    floatingActionButton = {
-                        FloatingActionButton(
-                            onClick = { /* do something */ },
-                            containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
-                            elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
-                        ) {
-                            Icon(Icons.Filled.Add, "Localized description")
-                        }
-                    }
-                )
-            },
-            floatingActionButtonPosition = androidx.compose.material3.FabPosition.Center
-        ) { innerPadding ->
-            Text(
-                modifier = Modifier.padding(innerPadding),
-                text = "Example of a scaffold with a bottom app bar."
-            )
-        }
-    }
-
 
 }
