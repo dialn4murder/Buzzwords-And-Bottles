@@ -1,4 +1,4 @@
-package com.example.buzzwordsbottles
+package com.example.buzzwordsbottles.screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.FormatListBulleted

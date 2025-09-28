@@ -7,13 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.buzzwordsbottles.adapters.DescriptionAdapter
-import com.example.buzzwordsbottles.classes.Descriptions
-import com.example.buzzwordsbottles.databinding.FragmentDescriptionsBinding
-import com.example.buzzwordsbottles.interfaces.ScannedTextListener
 import com.example.buzzwordsbottles.classes.SharedViewModel
+import com.example.buzzwordsbottles.screens.DescriptionsScreen
 
 
 class DescriptionsFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.example.buzzwordsbottles
+package com.example.buzzwordsbottles.screens
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
