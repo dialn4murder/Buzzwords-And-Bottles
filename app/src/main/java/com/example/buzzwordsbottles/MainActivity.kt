@@ -37,10 +37,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
+            val navController = rememberNavController()
             Scaffold(
-                bottomBar = { BottomAppBarExample(rememberNavController()) }
+                bottomBar = { BottomAppBarExample(navController) }
             ) { innerPadding ->
-                NavHost()
+                NavHost(navController)
             }
         }
 
