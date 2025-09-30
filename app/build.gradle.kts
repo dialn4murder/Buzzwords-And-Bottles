@@ -7,6 +7,10 @@ android {
     namespace = "com.example.buzzwordsbottles"
     compileSdk = 35
 
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.14"
+    }
+
     defaultConfig {
         applicationId = "com.example.buzzwordsbottles"
         minSdk = 24
@@ -19,6 +23,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     buildTypes {
@@ -40,6 +45,24 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.compose)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.accompanist.permissions)
+    implementation("androidx.compose.runtime:runtime:1.7.4")
+    implementation("androidx.compose.material3:material3")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.foundation)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("androidx.compose.material:material-icons-core")
+    implementation("androidx.compose.material:material-icons-extended")
+
     implementation("androidx.fragment:fragment-ktx:1.8.9")
     implementation (libs.androidx.camera.core)
     implementation (libs.androidx.camera.camera2)
