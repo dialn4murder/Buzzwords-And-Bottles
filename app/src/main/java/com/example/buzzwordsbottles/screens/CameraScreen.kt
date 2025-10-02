@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.buzzwordsbottles.TextAnalyzer
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -24,16 +25,10 @@ import com.google.accompanist.permissions.shouldShowRationale
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun CameraScreen(modifier: Modifier = Modifier) {
+fun CameraScreen(modifier: Modifier = Modifier, controller: LifecycleCameraController) {
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
     val context = LocalContext.current
-    val controller = remember {
-        LifecycleCameraController(context).apply {
-            setEnabledUseCases(
-                CameraController.IMAGE_ANALYSIS
-            )
-        }
-    }
+
     if (cameraPermissionState.status.isGranted) {
         CameraPreview(controller,
             modifier.fillMaxSize())

@@ -106,7 +106,7 @@ class CameraFragment : Fragment(), CameraListener, ScannedTextListener {
 
         // Starts analysis by calling the TextAnalyzer class and binds it to cameraExecutor
         val imageAnalyzer = ImageAnalysis.Builder().build().also {
-            it.setAnalyzer(cameraExecutor, TextAnalyzer(this))
+            it.setAnalyzer(cameraExecutor, TextAnalyzer())
         }
 
         // Unbinds everything from camera provider to be re-bound
