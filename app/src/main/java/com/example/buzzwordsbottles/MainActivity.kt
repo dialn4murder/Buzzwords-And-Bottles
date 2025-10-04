@@ -41,20 +41,6 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-//        checkCameraPermission()
-
     }
-
-//    private fun checkCameraPermission() {
-//        // Starts the camera if the user has granted camera permissions
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-//            == PackageManager.PERMISSION_GRANTED
-//        ) {
-//            // replaceFragment(CameraFragment(), "cameraFragment")
-//        // Requests camera permissions while the app is running
-//        } else {
-//            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 101)
-//        }
-//    }
 
 }
