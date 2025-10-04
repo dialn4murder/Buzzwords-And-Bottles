@@ -6,8 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.compose.rememberNavController
 
 
@@ -19,6 +21,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val navController = rememberNavController()
+            val lifecycleOwner = LocalLifecycleOwner.current
 
             val analyzer = remember {
                 TextAnalyzer()
@@ -28,14 +31,15 @@ class MainActivity : ComponentActivity() {
                 LifecycleCameraController(applicationContext).apply {
                     setEnabledUseCases(
                         CameraController.IMAGE_ANALYSIS)
-                    setImageAnalysisAnalyzer(
-                        ContextCompat.getMainExecutor(applicationContext),
-                        analyzer
-                    )
                 }
             }
+
+            LaunchedEffect(controller) {
+                controller.bindToLifecycle(lifecycleOwner)
+            }
+
             Scaffold(
-                bottomBar = { com.example.buzzwordsbottles.screens.BottomAppBar(navController) }
+                bottomBar = { com.example.buzzwordsbottles.screens.BottomAppBar(navController, controller) }
             ) { innerPadding ->
                 Navigation(navController, controller)
             }

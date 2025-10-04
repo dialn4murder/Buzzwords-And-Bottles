@@ -1,5 +1,6 @@
 package com.example.buzzwordsbottles.screens
 
+import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
 import androidx.compose.material.icons.filled.Add
@@ -11,10 +12,14 @@ import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
+import com.example.buzzwordsbottles.TextAnalyzer
 
 @Composable
-fun BottomAppBar(navController: NavHostController) {
+fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraController) {
+    val context = LocalContext.current
     BottomAppBar(
         actions = {
             IconButton(onClick = { navController.navigate("camera") }) {
@@ -29,7 +34,12 @@ fun BottomAppBar(navController: NavHostController) {
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { /* do something */ },
+                onClick = {
+                    controller.setImageAnalysisAnalyzer(
+                        ContextCompat.getMainExecutor(context),
+                        TextAnalyzer()
+                    )
+                },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
                 elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
             ) {
