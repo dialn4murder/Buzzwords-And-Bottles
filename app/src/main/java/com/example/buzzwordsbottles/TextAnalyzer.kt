@@ -37,8 +37,6 @@ class TextAnalyzer() : ImageAnalysis.Analyzer {
         val mediaImage = imageProxy.image ?: return
         val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
 
-        Log.d("Scanned Text", "DESHH;KSDGHYGKJYUGHKYTKJESRYK")
-
         recognizer.process(image)
             .addOnSuccessListener { visionText ->
                 var text = ""
@@ -49,6 +47,7 @@ class TextAnalyzer() : ImageAnalysis.Analyzer {
                 // Ends analysis and sends the text to the interface
 
                 //toggle = true
+                imageProxy.close()
             }
             // Catches any failure in finding the text
             .addOnFailureListener { e ->

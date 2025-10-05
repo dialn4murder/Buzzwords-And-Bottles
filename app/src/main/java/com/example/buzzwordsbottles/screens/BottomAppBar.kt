@@ -39,6 +39,7 @@ fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraCo
                         ContextCompat.getMainExecutor(context),
                         TextAnalyzer()
                     )
+                    controller.clearImageAnalysisAnalyzer()
                 },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
                 elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()

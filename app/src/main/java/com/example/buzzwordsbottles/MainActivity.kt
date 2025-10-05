@@ -23,10 +23,6 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val lifecycleOwner = LocalLifecycleOwner.current
 
-            val analyzer = remember {
-                TextAnalyzer()
-            }
-
             val controller = remember {
                 LifecycleCameraController(applicationContext).apply {
                     setEnabledUseCases(
