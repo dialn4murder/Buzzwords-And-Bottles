@@ -5,6 +5,7 @@ import androidx.annotation.OptIn
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import androidx.camera.view.LifecycleCameraController
 import com.example.buzzwordsbottles.interfaces.ScannedTextListener
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
@@ -15,7 +16,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions
  *
  */
 
-class TextAnalyzer() : ImageAnalysis.Analyzer {
+class TextAnalyzer(private val controller: LifecycleCameraController) : ImageAnalysis.Analyzer {
     // Initialises ML Kit
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
     private var toggle = false
@@ -48,6 +49,10 @@ class TextAnalyzer() : ImageAnalysis.Analyzer {
                 // Ends analysis and sends the text to the interface
                 toggle = true
 
+            }
+            .addOnCompleteListener {
+                imageProxy.close()
+                controller.clearImageAnalysisAnalyzer()
             }
             .addOnFailureListener {
                 imageProxy.close()

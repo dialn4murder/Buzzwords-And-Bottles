@@ -37,7 +37,7 @@ fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraCo
                 onClick = {
                     controller.setImageAnalysisAnalyzer(
                         ContextCompat.getMainExecutor(context),
-                        TextAnalyzer()
+                        TextAnalyzer(controller)
                     )
                 },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
