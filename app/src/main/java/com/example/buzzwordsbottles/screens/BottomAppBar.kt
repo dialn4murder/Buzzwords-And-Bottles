@@ -37,12 +37,11 @@ fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraCo
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
+                    controller.setImageAnalysisAnalyzer(
+                        ContextCompat.getMainExecutor(context),
+                        analyzer
+                    )
                     analyzer.toggle = true
-//                    controller.setImageAnalysisAnalyzer(
-//                        ContextCompat.getMainExecutor(context),
-//                        analyzer
-//                    )
-
 
                 },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
