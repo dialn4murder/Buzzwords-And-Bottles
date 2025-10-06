@@ -25,8 +25,8 @@ class MainActivity : ComponentActivity() {
 
             val controller = remember {
                 LifecycleCameraController(applicationContext).apply {
-                    setEnabledUseCases(
-                        CameraController.IMAGE_ANALYSIS)
+                    setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
+                    setImageAnalysisAnalyzer(ContextCompat.getMainExecutor(applicationContext), TextAnalyzer())
                 }
             }
 

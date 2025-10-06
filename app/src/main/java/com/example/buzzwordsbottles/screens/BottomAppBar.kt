@@ -12,6 +12,7 @@ import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
@@ -20,6 +21,7 @@ import com.example.buzzwordsbottles.TextAnalyzer
 @Composable
 fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraController) {
     val context = LocalContext.current
+    val analyzer = remember {TextAnalyzer()}
     BottomAppBar(
         actions = {
             IconButton(onClick = { navController.navigate("camera") }) {
@@ -35,10 +37,13 @@ fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraCo
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    controller.setImageAnalysisAnalyzer(
-                        ContextCompat.getMainExecutor(context),
-                        TextAnalyzer(controller)
-                    )
+                    analyzer.toggle = true
+//                    controller.setImageAnalysisAnalyzer(
+//                        ContextCompat.getMainExecutor(context),
+//                        analyzer
+//                    )
+
+
                 },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
                 elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
