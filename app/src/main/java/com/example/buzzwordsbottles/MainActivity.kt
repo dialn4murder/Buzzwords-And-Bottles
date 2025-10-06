@@ -1,14 +1,15 @@
 package com.example.buzzwordsbottles
 
-import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import android.Manifest
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.camera.view.CameraController
+import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material3.Scaffold
-import androidx.core.app.ActivityCompat
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.navigation.compose.rememberNavController
 
 
@@ -16,31 +17,30 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
 
         setContent {
             val navController = rememberNavController()
+            val lifecycleOwner = LocalLifecycleOwner.current
+
+            val controller = remember {
+                LifecycleCameraController(applicationContext).apply {
+                    setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
+                    setImageAnalysisAnalyzer(ContextCompat.getMainExecutor(applicationContext), TextAnalyzer())
+                }
+            }
+
+            LaunchedEffect(controller) {
+                controller.bindToLifecycle(lifecycleOwner)
+            }
+
             Scaffold(
-                bottomBar = { com.example.buzzwordsbottles.screens.BottomAppBar(navController) }
+                bottomBar = { com.example.buzzwordsbottles.screens.BottomAppBar(navController, controller) }
             ) { innerPadding ->
-                Navigation(navController)
+                Navigation(navController, controller)
             }
         }
 
-        checkCameraPermission()
-
-    }
-
-    private fun checkCameraPermission() {
-        // Starts the camera if the user has granted camera permissions
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            == PackageManager.PERMISSION_GRANTED
-        ) {
-            // replaceFragment(CameraFragment(), "cameraFragment")
-        // Requests camera permissions while the app is running
-        } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 101)
-        }
     }
 
 }
