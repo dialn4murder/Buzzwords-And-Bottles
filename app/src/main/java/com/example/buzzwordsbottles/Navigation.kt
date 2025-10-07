@@ -13,6 +13,6 @@ import com.example.buzzwordsbottles.screens.DescriptionsScreen
 fun Navigation(navController: NavHostController, controller: LifecycleCameraController) {
     NavHost(navController, startDestination = "camera") {
         composable("camera") { CameraScreen(modifier = Modifier,controller) }
-        composable("descriptions") { DescriptionsScreen() }
+        composable("descriptions") { DescriptionsScreen(modifier = Modifier) }
     }
 }
