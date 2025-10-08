@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,14 +18,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.buzzwordsbottles.classes.SharedViewModel
 
 @Composable
 fun DescriptionsScreen(modifier: Modifier = Modifier){
+    val sharedViewModel: SharedViewModel = viewModel()
+    val text = sharedViewModel.scannedText
 
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 128.dp)
     ) {
-        items(100) { i->
+        items(text) { i->
             Box(
                 modifier = modifier
                     .width(128.dp)
@@ -34,7 +39,7 @@ fun DescriptionsScreen(modifier: Modifier = Modifier){
                     .background(Color.Cyan),
                 contentAlignment = Alignment.Center
             ){
-                Text(text = "Item $i")
+                Text(text = i.description)
             }
         }
     }
