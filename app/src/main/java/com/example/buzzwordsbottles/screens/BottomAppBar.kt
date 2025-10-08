@@ -15,14 +15,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.buzzwordsbottles.TextAnalyzer
 import com.example.buzzwordsbottles.classes.NavRoute
+import com.example.buzzwordsbottles.classes.SharedViewModel
 
 @Composable
 fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraController) {
     val context = LocalContext.current
-    val analyzer = remember {TextAnalyzer()}
+    val sharedViewModel: SharedViewModel = viewModel()
+    val analyzer = remember {TextAnalyzer(sharedViewModel)}
     BottomAppBar(
         actions = {
             IconButton(onClick = { navController.navigate(NavRoute.Camera.name) }) {

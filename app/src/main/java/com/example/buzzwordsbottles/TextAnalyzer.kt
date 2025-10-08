@@ -6,6 +6,7 @@ import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import androidx.camera.view.LifecycleCameraController
+import com.example.buzzwordsbottles.classes.SharedViewModel
 import com.example.buzzwordsbottles.interfaces.ScannedTextListener
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
@@ -16,9 +17,10 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions
  *
  */
 
-class TextAnalyzer() : ImageAnalysis.Analyzer {
+class TextAnalyzer(private val viewModel: SharedViewModel) : ImageAnalysis.Analyzer {
     // Initialises ML Kit
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+
     var toggle = false
 
     /**
@@ -49,6 +51,7 @@ class TextAnalyzer() : ImageAnalysis.Analyzer {
                     text += block.text
                     Log.d("Scanned Text", block.text)
                 }
+                viewModel.setScannedText(text)
 
             }
             .addOnCompleteListener {
