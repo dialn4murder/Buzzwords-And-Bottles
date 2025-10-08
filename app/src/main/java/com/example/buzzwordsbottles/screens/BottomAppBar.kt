@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import com.example.buzzwordsbottles.TextAnalyzer
+import com.example.buzzwordsbottles.classes.NavRoute
 
 @Composable
 fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraController) {
@@ -24,10 +25,10 @@ fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraCo
     val analyzer = remember {TextAnalyzer()}
     BottomAppBar(
         actions = {
-            IconButton(onClick = { navController.navigate("camera") }) {
+            IconButton(onClick = { navController.navigate(NavRoute.Camera.name) }) {
                 Icon(Icons.Filled.CameraAlt, contentDescription = "Localized description")
             }
-            IconButton(onClick = { navController.navigate("descriptions") }) {
+            IconButton(onClick = { navController.navigate(NavRoute.Descriptions.name) }) {
                 Icon(
                     Icons.AutoMirrored.Filled.FormatListBulleted,
                     contentDescription = "Localized description",
