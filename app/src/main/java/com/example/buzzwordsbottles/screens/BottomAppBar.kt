@@ -19,13 +19,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.buzzwordsbottles.TextAnalyzer
 import com.example.buzzwordsbottles.classes.NavRoute
-import com.example.buzzwordsbottles.classes.SharedViewModel
+import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
 
 @Composable
 fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraController) {
     val context = LocalContext.current
-    val sharedViewModel: SharedViewModel = viewModel()
-    val analyzer = remember {TextAnalyzer(sharedViewModel)}
+    val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
+    val analyzer = remember {TextAnalyzer(textAnalysisViewModel)}
     BottomAppBar(
         actions = {
             IconButton(onClick = { navController.navigate(NavRoute.Camera.name) }) {
