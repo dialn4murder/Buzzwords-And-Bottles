@@ -21,10 +21,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+
             val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
             val navController = rememberNavController()
             val lifecycleOwner = LocalLifecycleOwner.current
 
+            // Initialises and applies the text analyzer class to the camera and enabled image analysis
             val controller = remember {
                 LifecycleCameraController(applicationContext).apply {
                     setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
@@ -32,13 +34,16 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
+            // Binds the camera
             LaunchedEffect(controller) {
                 controller.bindToLifecycle(lifecycleOwner)
             }
 
             Scaffold(
+                // Starts the bottom nav bar
                 bottomBar = { com.example.buzzwordsbottles.screens.BottomAppBar(navController, controller) }
             ) { innerPadding ->
+                // Starts the navigation
                 Navigation(navController, controller, textAnalysisViewModel)
             }
         }

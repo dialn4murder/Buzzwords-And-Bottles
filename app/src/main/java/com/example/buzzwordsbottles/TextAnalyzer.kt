@@ -54,8 +54,6 @@ class TextAnalyzer(private val viewModel: TextAnalysisViewModel) : ImageAnalysis
             }
             .addOnCompleteListener {
                 imageProxy.close()
-//                controller.clearImageAnalysisAnalyzer()
-//                toggle = true
             }
 
         }

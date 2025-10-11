@@ -15,7 +15,9 @@ import com.example.buzzwordsbottles.screens.DescriptionsScreen
 @Composable
 fun Navigation(navController: NavHostController, controller: LifecycleCameraController, textAnalysisViewModel: TextAnalysisViewModel) {
 
+    // Starts the navhost
     NavHost(navController, startDestination = NavRoute.Camera.name) {
+        // Maps the route to the screens
         composable(NavRoute.Camera.name) { CameraScreen(modifier = Modifier,controller) }
         composable(NavRoute.Descriptions.name) { DescriptionsScreen(modifier = Modifier, textAnalysisViewModel ) }
     }
