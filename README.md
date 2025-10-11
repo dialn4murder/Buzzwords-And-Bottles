@@ -18,6 +18,8 @@ I learned more complex ideas within android studio such as CameraX and Googles M
 
 Roadblocks were overcome during development such as the FAB button not working which was noticed when the button was not outputting anything. Initally thinking that the function was at fault but later realising after debugging the button was setup incorrectly. What this taught me was to focus on simple, easily correctable possible reasons for bugs then move onto larger reasons for the bug to save time on more complex solutions.
 
+I have gone through the motions of migrating from views to compose allowing me to experience and learn how to seamlessly migrate to a new framework. The migration was done to introduce Material 3 to the application and learning compose has shown me how intuitive and fun to use.
+
 
 ## 🔗 Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dylan-champion/)
