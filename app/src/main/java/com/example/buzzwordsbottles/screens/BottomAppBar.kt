@@ -23,11 +23,13 @@ import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
 
 @Composable
 fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraController) {
+    // Initialises context view model and analyzer
     val context = LocalContext.current
     val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
     val analyzer = remember {TextAnalyzer(textAnalysisViewModel)}
     BottomAppBar(
         actions = {
+            // Camera and description buttons
             IconButton(onClick = { navController.navigate(NavRoute.Camera.name) }) {
                 Icon(Icons.Filled.CameraAlt, contentDescription = "Localized description")
             }
@@ -38,6 +40,7 @@ fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraCo
                 )
             }
         },
+        // FAB to start analysis
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {

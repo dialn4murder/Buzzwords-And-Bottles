@@ -27,8 +27,8 @@ import com.google.accompanist.permissions.shouldShowRationale
 @Composable
 fun CameraScreen(modifier: Modifier = Modifier, controller: LifecycleCameraController) {
     val cameraPermissionState = rememberPermissionState(android.Manifest.permission.CAMERA)
-    val context = LocalContext.current
 
+    // Starts camera if permission is granted
     if (cameraPermissionState.status.isGranted) {
         CameraPreview(controller,
             modifier.fillMaxSize())
@@ -37,6 +37,7 @@ fun CameraScreen(modifier: Modifier = Modifier, controller: LifecycleCameraContr
             modifier = modifier.fillMaxSize().wrapContentSize().widthIn(max = 480.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Tells user to give camera permissions if not granted
             val textToShow = if (cameraPermissionState.status.shouldShowRationale) {
                 // Show if the user has denied camera permissions
                 "Whoops! Looks like we need your camera to work our magic!" +
