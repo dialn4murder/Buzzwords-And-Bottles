@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class SharedViewModel : ViewModel() {
-    var scannedText = mutableListOf<Descriptions>()
+    private val _scannedText = MutableLiveData<List<Descriptions>>()
+    val scannedText: LiveData<List<Descriptions>> get() = _scannedText
 
     fun setScannedText(text: String){
-        scannedText.add(Descriptions(text))
+        val currentList = _scannedText.value ?: emptyList()
+        _scannedText.value = currentList + Descriptions(text)
     }
 }
