@@ -13,6 +13,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
+import com.example.compose.AppTheme
 
 
 class MainActivity : ComponentActivity() {
@@ -21,6 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+
 
             val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
             val navController = rememberNavController()

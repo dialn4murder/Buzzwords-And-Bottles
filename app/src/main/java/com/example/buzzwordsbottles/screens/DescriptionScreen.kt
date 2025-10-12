@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -38,6 +39,7 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, textAnalysisViewModel: Tex
                 contentAlignment = Alignment.Center
             ){
                 Text(text = i.description)
+
             }
         }
     }
