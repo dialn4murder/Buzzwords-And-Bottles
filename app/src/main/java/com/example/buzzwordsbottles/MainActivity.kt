@@ -23,30 +23,39 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
+            AppTheme {
+                val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
+                val navController = rememberNavController()
+                val lifecycleOwner = LocalLifecycleOwner.current
 
-            val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
-            val navController = rememberNavController()
-            val lifecycleOwner = LocalLifecycleOwner.current
-
-            // Initialises and applies the text analyzer class to the camera and enabled image analysis
-            val controller = remember {
-                LifecycleCameraController(applicationContext).apply {
-                    setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
-                    setImageAnalysisAnalyzer(ContextCompat.getMainExecutor(applicationContext), TextAnalyzer(textAnalysisViewModel))
+                // Initialises and applies the text analyzer class to the camera and enabled image analysis
+                val controller = remember {
+                    LifecycleCameraController(applicationContext).apply {
+                        setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
+                        setImageAnalysisAnalyzer(
+                            ContextCompat.getMainExecutor(applicationContext),
+                            TextAnalyzer(textAnalysisViewModel)
+                        )
+                    }
                 }
-            }
 
-            // Binds the camera
-            LaunchedEffect(controller) {
-                controller.bindToLifecycle(lifecycleOwner)
-            }
+                // Binds the camera
+                LaunchedEffect(controller) {
+                    controller.bindToLifecycle(lifecycleOwner)
+                }
 
-            Scaffold(
-                // Starts the bottom nav bar
-                bottomBar = { com.example.buzzwordsbottles.screens.BottomAppBar(navController, controller) }
-            ) { innerPadding ->
-                // Starts the navigation
-                Navigation(navController, controller, textAnalysisViewModel)
+                Scaffold(
+                    // Starts the bottom nav bar
+                    bottomBar = {
+                        com.example.buzzwordsbottles.screens.BottomAppBar(
+                            navController,
+                            controller
+                        )
+                    }
+                ) { innerPadding ->
+                    // Starts the navigation
+                    Navigation(navController, controller, textAnalysisViewModel)
+                }
             }
         }
 
