@@ -35,10 +35,12 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, textAnalysisViewModel: Tex
                     .width(128.dp)
                     .height(128.dp)
                     .padding(2.dp)
-                    .clip(RoundedCornerShape(5.dp)),
+                    .clip(RoundedCornerShape(5.dp))
+                    .background(MaterialTheme.colorScheme.primaryContainer),
                 contentAlignment = Alignment.Center
             ){
-                Text(text = i.description)
+                Text(text = i.description,
+                    color = MaterialTheme.colorScheme.onPrimary, style = MaterialTheme.typography.bodySmall)
 
             }
         }
