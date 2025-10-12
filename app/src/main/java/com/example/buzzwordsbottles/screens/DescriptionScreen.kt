@@ -34,8 +34,7 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, textAnalysisViewModel: Tex
                     .width(128.dp)
                     .height(128.dp)
                     .padding(2.dp)
-                    .clip(RoundedCornerShape(5.dp))
-                    .background(Color.Cyan),
+                    .clip(RoundedCornerShape(5.dp)),
                 contentAlignment = Alignment.Center
             ){
                 Text(text = i.description)
