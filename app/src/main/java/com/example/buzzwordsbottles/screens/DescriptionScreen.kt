@@ -29,22 +29,23 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, textAnalysisViewModel: Tex
     val text = textAnalysisViewModel.scannedText.observeAsState(emptyList())
 
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp)
+        columns = GridCells.Adaptive(minSize = 384.dp)
     ) {
-        items(text.value) { i->
-            Box(
-                modifier = modifier
-                    .width(128.dp)
-                    .height(128.dp)
-                    .padding(2.dp)
-                    .clip(RoundedCornerShape(5.dp))
-                    .background(MaterialTheme.colorScheme.primaryContainer),
-                contentAlignment = Alignment.Center
-            ){
-                Text(text = i.description,
-                    color = MaterialTheme.colorScheme.onPrimary, style = MaterialTheme.typography.bodySmall)
-
-            }
+        items(text.value) { description->
+//            Box(
+//                modifier = modifier
+//                    .width(128.dp)
+//                    .height(128.dp)
+//                    .padding(2.dp)
+//                    .clip(RoundedCornerShape(5.dp))
+//                    .background(MaterialTheme.colorScheme.primaryContainer),
+//                contentAlignment = Alignment.Center
+//            ){
+//                Text(text = i.description,
+//                    color = MaterialTheme.colorScheme.onPrimary, style = MaterialTheme.typography.bodySmall)
+//
+//            }
+            DescriptionCard(description)
         }
     }
 
