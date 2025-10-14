@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
-            AppTheme {
+            AppTheme(dynamicColor = false) {
                 val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
                 val navController = rememberNavController()
                 val lifecycleOwner = LocalLifecycleOwner.current
