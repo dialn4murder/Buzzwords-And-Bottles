@@ -28,7 +28,6 @@ class TextAnalyzer(private val viewModel: TextAnalysisViewModel) : ImageAnalysis
      */
     @OptIn(ExperimentalGetImage::class)
     override fun analyze(imageProxy: ImageProxy) {
-        //Log.d("Scanned Text", "ANALYSIS HAS BEEN RAN RAN RAN RAN RAN RAN")
         // Checks if analysis has finished
         if (!toggle){
             imageProxy.close()

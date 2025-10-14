@@ -11,8 +11,11 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -20,13 +23,21 @@ import androidx.navigation.NavHostController
 import com.example.buzzwordsbottles.TextAnalyzer
 import com.example.buzzwordsbottles.classes.NavRoute
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
-fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraController) {
+fun BottomAppBar(
+    navController: NavHostController,
+    controller: LifecycleCameraController,
+    snackbarHostState: SnackbarHostState
+) {
     // Initialises context view model and analyzer
     val context = LocalContext.current
     val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
     val analyzer = remember {TextAnalyzer(textAnalysisViewModel)}
+    val coroutineScope = rememberCoroutineScope()
+
     BottomAppBar(
         actions = {
             // Camera and description buttons
@@ -48,7 +59,16 @@ fun BottomAppBar(navController: NavHostController, controller: LifecycleCameraCo
                         ContextCompat.getMainExecutor(context),
                         analyzer
                     )
+
                     analyzer.toggle = true
+
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(
+                            "Description Created!",
+                            actionLabel = "Undo",
+                            withDismissAction = true,
+                            duration = SnackbarDuration.Short)
+                    }
 
                 },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,

@@ -27,6 +27,8 @@ class MainActivity : ComponentActivity() {
                 val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
                 val navController = rememberNavController()
                 val lifecycleOwner = LocalLifecycleOwner.current
+                val snackbarHostState = remember { androidx.compose.material3.SnackbarHostState() }
+
 
                 // Initialises and applies the text analyzer class to the camera and enabled image analysis
                 val controller = remember {
@@ -45,11 +47,15 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Scaffold(
+                    snackbarHost = {
+                        androidx.compose.material3.SnackbarHost(hostState = snackbarHostState)
+                    },
                     // Starts the bottom nav bar
                     bottomBar = {
                         com.example.buzzwordsbottles.screens.BottomAppBar(
                             navController,
-                            controller
+                            controller,
+                            snackbarHostState
                         )
                     }
                 ) { innerPadding ->
