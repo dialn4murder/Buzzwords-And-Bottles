@@ -1,8 +1,10 @@
 package com.example.buzzwordsbottles
 
+import android.graphics.Camera
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.camera.core.ImageAnalysis
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material3.Scaffold
@@ -14,6 +16,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
 import com.example.compose.AppTheme
+import java.util.concurrent.Executor
 
 
 class MainActivity : ComponentActivity() {
@@ -35,10 +38,15 @@ class MainActivity : ComponentActivity() {
                 // Initialises and applies the text analyzer class to the camera and enabled image analysis
                 val controller = remember {
                     LifecycleCameraController(applicationContext).apply {
-                        setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
+                        setEnabledUseCases(CameraController.IMAGE_ANALYSIS, )
+
+                        // Ensures that it analyses the first image it sees
+                        imageAnalysisBackpressureStrategy = ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
+
                         setImageAnalysisAnalyzer(
                             ContextCompat.getMainExecutor(applicationContext),
                             TextAnalyzer(textAnalysisViewModel)
+
                         )
                     }
                 }
@@ -68,6 +76,13 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+    }
+
+    private fun setImageAnalysisAnalyzer(
+        executor: Executor,
+        analyzer: TextAnalyzer,
+        strategyKeepOnlyLatest: Any
+    ) {
     }
 
 }

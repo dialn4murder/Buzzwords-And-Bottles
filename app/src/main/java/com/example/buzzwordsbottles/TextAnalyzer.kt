@@ -18,7 +18,6 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 class TextAnalyzer(private val viewModel: TextAnalysisViewModel) : ImageAnalysis.Analyzer {
     // Initialises ML Kit
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-
     var toggle = false
 
     /**
