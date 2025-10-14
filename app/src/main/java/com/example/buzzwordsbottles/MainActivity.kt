@@ -79,7 +79,7 @@ class MainActivity : ComponentActivity() {
                         com.example.buzzwordsbottles.screens.BottomAppBar(
                             navController,
                             controller,
-                            snackbarHostState
+
                         )
                     }
                 ) { innerPadding ->
