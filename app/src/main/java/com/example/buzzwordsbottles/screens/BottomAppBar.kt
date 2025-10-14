@@ -66,11 +66,11 @@ fun BottomAppBar(
                     coroutineScope.launch {
                         // Shows M3's snack bar
                         // TODO Implement an undo for each scanned description
-                        snackbarHostState.showSnackbar(
-                            "Description Created!",
-                            actionLabel = "Undo",
-                            withDismissAction = true,
-                            duration = SnackbarDuration.Short)
+//                        snackbarHostState.showSnackbar(
+//                            "Description Created!",
+//                            actionLabel = "Undo",
+//                            withDismissAction = true,
+//                            duration = SnackbarDuration.Short)
                     }
 
                 },
