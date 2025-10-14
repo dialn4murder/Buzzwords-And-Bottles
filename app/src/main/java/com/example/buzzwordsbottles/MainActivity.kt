@@ -23,7 +23,9 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
+            // Enables custom M3 generated colour theme
             AppTheme(dynamicColor = false) {
+                // Initialises and remembers important information
                 val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
                 val navController = rememberNavController()
                 val lifecycleOwner = LocalLifecycleOwner.current
@@ -47,6 +49,7 @@ class MainActivity : ComponentActivity() {
                 }
 
                 Scaffold(
+                    // Initialises M3 snack bar
                     snackbarHost = {
                         androidx.compose.material3.SnackbarHost(hostState = snackbarHostState)
                     },

@@ -32,7 +32,7 @@ fun BottomAppBar(
     controller: LifecycleCameraController,
     snackbarHostState: SnackbarHostState
 ) {
-    // Initialises context view model and analyzer
+    // Initialises and remembers important information
     val context = LocalContext.current
     val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
     val analyzer = remember {TextAnalyzer(textAnalysisViewModel)}
@@ -62,7 +62,10 @@ fun BottomAppBar(
 
                     analyzer.toggle = true
 
+                    // Launches snack bar outside of the @Composable scope
                     coroutineScope.launch {
+                        // Shows M3's snack bar
+                        // TODO Implement an undo for each scanned description
                         snackbarHostState.showSnackbar(
                             "Description Created!",
                             actionLabel = "Undo",
