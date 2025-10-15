@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-/app/src/main/assets/1.tflite
+/app/src/main/assets/wineML.tflite
