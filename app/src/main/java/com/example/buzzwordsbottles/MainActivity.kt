@@ -15,7 +15,11 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import com.example.buzzwordsbottles.classes.ObserveAsEvents
+import com.example.buzzwordsbottles.classes.SnackbarController
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
+import com.example.buzzwordsbottles.classes.TextAnalyzer
+import com.example.buzzwordsbottles.screens.Navigation
 import com.example.compose.AppTheme
 import kotlinx.coroutines.launch
 
@@ -35,8 +39,10 @@ class MainActivity : ComponentActivity() {
                 val snackbarHostState = remember { androidx.compose.material3.SnackbarHostState() }
                 val coroutine = rememberCoroutineScope()
 
-                ObserveAsEvents(flow = SnackbarController.events,
-                    snackbarHostState) { event ->
+                ObserveAsEvents(
+                    flow = SnackbarController.events,
+                    snackbarHostState
+                ) { event ->
                     coroutine.launch {
                         snackbarHostState.currentSnackbarData?.dismiss()
 
@@ -46,7 +52,7 @@ class MainActivity : ComponentActivity() {
                             duration = SnackbarDuration.Short
                         )
 
-                        if (result == SnackbarResult.ActionPerformed){
+                        if (result == SnackbarResult.ActionPerformed) {
                             event.action?.action?.invoke()
                         }
                     }

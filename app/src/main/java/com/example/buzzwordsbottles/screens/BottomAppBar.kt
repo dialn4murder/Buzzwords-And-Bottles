@@ -20,7 +20,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.buzzwordsbottles.TextAnalyzer
+import com.example.buzzwordsbottles.classes.TextAnalyzer
 import com.example.buzzwordsbottles.classes.NavRoute
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
 import kotlinx.coroutines.coroutineScope
