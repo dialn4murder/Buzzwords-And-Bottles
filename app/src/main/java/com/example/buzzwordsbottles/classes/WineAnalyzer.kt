@@ -20,11 +20,8 @@ class WineAnalyzer(
     private val classifier: WineClassifier,
     private val onResults: (List<Classification>) -> Unit
     ) : ImageAnalysis.Analyzer {
-    // Initialises ML Kit
-    private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
-
+    // Ensures doesn't go multiple times
     var frameSkipCounter = 0
-    var toggle = false
 
     /**
      * Analyzes the image and prints the text of each frame
@@ -33,15 +30,20 @@ class WineAnalyzer(
      */
     @OptIn(ExperimentalGetImage::class)
     override fun analyze(imageProxy: ImageProxy) {
+        // Ensures doesn't go multiple times
         if (frameSkipCounter % 60 == 0) {
+            // Gets rotation info
             val rotationDegrees = imageProxy.imageInfo.rotationDegrees
+            // Changes imageProxy to bitmap and ensures its the right size for the model
             val bitmap = imageProxy
                 .toBitmap()
                 .centerCrop(224 , 224 )
 
+            // Wine information stored into a List
             val results = classifier.classify(bitmap, rotationDegrees)
             onResults(results)
 
+            // Loops through the list and sends it to the viewmodel
             results.forEach { it
                 Log.d("scan", it.name)
                 viewModel.setScannedText(it.name)
