@@ -1,4 +1,6 @@
 package com.example.buzzwordsbottles.classes
 
-class Descriptions(var description: String) {
-}
+data class Descriptions(
+    val name: String,
+    val score: Float
+)
