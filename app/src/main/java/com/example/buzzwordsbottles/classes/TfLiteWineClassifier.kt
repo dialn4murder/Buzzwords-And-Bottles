@@ -31,7 +31,7 @@ class TfLiteWineClassifier(
         try {
             classifier = ImageClassifier.createFromFileAndOptions(
                 context,
-                "wineML",
+                "wineML.tflite",
                 options)
 
         } catch (e: IllegalStateException){

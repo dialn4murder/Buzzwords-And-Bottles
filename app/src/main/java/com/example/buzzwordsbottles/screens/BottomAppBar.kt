@@ -25,11 +25,11 @@ import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
 fun BottomAppBar(
     navController: NavHostController,
     controller: LifecycleCameraController,
+    analyzer: WineAnalyzer
 ) {
     // Initialises and remembers important information
     val context = LocalContext.current
     val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
-    val analyzer = remember {WineAnalyzer(textAnalysisViewModel)}
 
 
     BottomAppBar(
@@ -53,7 +53,7 @@ fun BottomAppBar(
                         ContextCompat.getMainExecutor(context),
                         analyzer
                     )
-                    analyzer.toggle = true
+                    //analyzer.toggle = true
 
                 },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,

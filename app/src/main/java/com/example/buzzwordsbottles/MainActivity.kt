@@ -79,6 +79,10 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
+                classifications.forEach {
+                    textAnalysisViewModel.setScannedText(it.name)
+                }
+
 
                 // Initialises and applies the text analyzer class to the camera and enabled image analysis
                 val controller = remember {
@@ -106,7 +110,7 @@ class MainActivity : ComponentActivity() {
                         com.example.buzzwordsbottles.screens.BottomAppBar(
                             navController,
                             controller,
-
+                            analyzer
                         )
                     }
                 ) { innerPadding ->
