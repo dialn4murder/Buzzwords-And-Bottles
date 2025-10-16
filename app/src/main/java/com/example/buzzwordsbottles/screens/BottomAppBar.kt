@@ -1,5 +1,6 @@
 package com.example.buzzwordsbottles.screens
 
+import android.util.Log
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
@@ -17,6 +18,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.buzzwordsbottles.classes.Classification
 import com.example.buzzwordsbottles.classes.WineAnalyzer
 import com.example.buzzwordsbottles.classes.NavRoute
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
@@ -53,6 +55,7 @@ fun BottomAppBar(
                         ContextCompat.getMainExecutor(context),
                         analyzer
                     )
+
                     //analyzer.toggle = true
 
                 },

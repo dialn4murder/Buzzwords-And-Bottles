@@ -8,6 +8,7 @@ import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import org.checkerframework.checker.fenum.qual.SwingElementOrientation
 
 /**
  * TextAnalyzer will analyse each frame for text which will be used to scrape websites for descriptions
@@ -40,6 +41,10 @@ class WineAnalyzer(
 
             val results = classifier.classify(bitmap, rotationDegrees)
             onResults(results)
+
+            results.forEach { it
+                viewModel.setScannedText(it.name)
+            }
 
             imageProxy.close()
         }
