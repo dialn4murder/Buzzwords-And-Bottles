@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                 val snackbarHostState = remember { androidx.compose.material3.SnackbarHostState() }
                 val coroutine = rememberCoroutineScope()
 
+                // Observes if there are any snack bars to be made
                 ObserveAsEvents(
                     flow = SnackbarController.events,
                     snackbarHostState
@@ -65,6 +66,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                // Initialises analyzer
                 val analyzer = remember {
                     WineAnalyzer(
                         textAnalysisViewModel,
