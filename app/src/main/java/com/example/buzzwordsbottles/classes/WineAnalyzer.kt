@@ -43,6 +43,7 @@ class WineAnalyzer(
             onResults(results)
 
             results.forEach { it
+                Log.d("scan", it.name)
                 viewModel.setScannedText(it.name)
             }
 

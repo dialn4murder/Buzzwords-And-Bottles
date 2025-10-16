@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.camera.core.ImageCapture
 import androidx.camera.view.CameraController
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material3.Scaffold
@@ -85,16 +86,18 @@ class MainActivity : ComponentActivity() {
                 val controller = remember {
                     LifecycleCameraController(applicationContext).apply {
                         setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
+                        setEnabledUseCases(CameraController.IMAGE_CAPTURE)
                         setImageAnalysisAnalyzer(
                             ContextCompat.getMainExecutor(applicationContext),
                             analyzer
                         )
+
                     }
                 }
 
                 // Binds the camera
                 LaunchedEffect(controller) {
-                    controller.bindToLifecycle(lifecycleOwner)
+                    controller.bindToLifecycle(lifecycleOwner )
                 }
 
                 Scaffold(

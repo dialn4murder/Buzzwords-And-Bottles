@@ -1,6 +1,10 @@
 package com.example.buzzwordsbottles.screens
 
 import android.util.Log
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
+import androidx.camera.core.takePicture
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
@@ -22,6 +26,7 @@ import com.example.buzzwordsbottles.classes.Classification
 import com.example.buzzwordsbottles.classes.WineAnalyzer
 import com.example.buzzwordsbottles.classes.NavRoute
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
+import kotlinx.coroutines.coroutineScope
 
 @Composable
 fun BottomAppBar(
@@ -31,7 +36,7 @@ fun BottomAppBar(
 ) {
     // Initialises and remembers important information
     val context = LocalContext.current
-    val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
+//    val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
 
 
     BottomAppBar(
@@ -51,12 +56,20 @@ fun BottomAppBar(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    controller.setImageAnalysisAnalyzer(
+                    controller.takePicture(
                         ContextCompat.getMainExecutor(context),
-                        analyzer
-                    )
+                        object : ImageCapture.OnImageCapturedCallback(){
+                            override fun onCaptureSuccess(image: ImageProxy) {
+                                analyzer.analyze(image)
+                                super.onCaptureSuccess(image)
+                            }
 
-                    //analyzer.toggle = true
+                            override fun onError(exception: ImageCaptureException) {
+                                Log.d("Camera", "Error taking photo")
+                                super.onError(exception)
+                            }
+                        }
+                    )
 
                 },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
