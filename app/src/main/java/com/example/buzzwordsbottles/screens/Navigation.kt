@@ -1,16 +1,13 @@
-package com.example.buzzwordsbottles
+package com.example.buzzwordsbottles.screens
 
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.buzzwordsbottles.classes.NavRoute
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
-import com.example.buzzwordsbottles.screens.CameraScreen
-import com.example.buzzwordsbottles.screens.DescriptionsScreen
 
 @Composable
 fun Navigation(navController: NavHostController, controller: LifecycleCameraController, textAnalysisViewModel: TextAnalysisViewModel) {

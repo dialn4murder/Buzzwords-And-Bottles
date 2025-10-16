@@ -1,13 +1,9 @@
 package com.example.buzzwordsbottles.classes
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.buzzwordsbottles.SnackbarAction
-import com.example.buzzwordsbottles.SnackbarController
-import com.example.buzzwordsbottles.SnackbarEvent
 import kotlinx.coroutines.launch
 
 class TextAnalysisViewModel : ViewModel() {

@@ -1,4 +1,4 @@
-package com.example.buzzwordsbottles
+package com.example.buzzwordsbottles.classes
 
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
