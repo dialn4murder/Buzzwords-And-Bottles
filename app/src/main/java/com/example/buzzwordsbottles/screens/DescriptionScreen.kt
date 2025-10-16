@@ -1,35 +1,18 @@
 package com.example.buzzwordsbottles.screens
 
 
-import android.content.res.Resources
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SearchBar
-import androidx.compose.material3.SearchBarDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
+import com.example.buzzwordsbottles.classes.WineViewModel
 
 @Composable
-fun DescriptionsScreen(modifier: Modifier = Modifier, textAnalysisViewModel: TextAnalysisViewModel){
+fun DescriptionsScreen(modifier: Modifier = Modifier, wineViewModel: WineViewModel){
 
-    val text = textAnalysisViewModel.scannedText.observeAsState(emptyList())
+    val text = wineViewModel.scannedText.observeAsState(emptyList())
     
     LazyVerticalGrid(
         columns = GridCells.Fixed(1)

@@ -7,15 +7,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.buzzwordsbottles.classes.NavRoute
-import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
+import com.example.buzzwordsbottles.classes.WineViewModel
 
 @Composable
-fun Navigation(navController: NavHostController, controller: LifecycleCameraController, textAnalysisViewModel: TextAnalysisViewModel) {
+fun Navigation(navController: NavHostController, controller: LifecycleCameraController, wineViewModel: WineViewModel) {
 
     // Starts the navhost
     NavHost(navController, startDestination = NavRoute.Camera.name) {
         // Maps the route to the screens
         composable(NavRoute.Camera.name) { CameraScreen(modifier = Modifier,controller) }
-        composable(NavRoute.Descriptions.name) { DescriptionsScreen(modifier = Modifier, textAnalysisViewModel ) }
+        composable(NavRoute.Descriptions.name) { DescriptionsScreen(modifier = Modifier, wineViewModel ) }
     }
 }

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class TextAnalysisViewModel : ViewModel() {
+class WineViewModel : ViewModel() {
     private val _scannedText = MutableLiveData<List<Descriptions>>()
 
     val scannedText: LiveData<List<Descriptions>> get() = _scannedText

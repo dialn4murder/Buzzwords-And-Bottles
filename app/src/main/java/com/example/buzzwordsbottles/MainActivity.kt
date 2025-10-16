@@ -17,7 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.buzzwordsbottles.classes.ObserveAsEvents
 import com.example.buzzwordsbottles.classes.SnackbarController
-import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
+import com.example.buzzwordsbottles.classes.WineViewModel
 import com.example.buzzwordsbottles.classes.TfLiteWineClassifier
 import com.example.buzzwordsbottles.classes.WineAnalyzer
 import com.example.buzzwordsbottles.screens.Navigation
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
             // Enables custom M3 generated colour theme
             AppTheme(dynamicColor = false) {
                 // Initialises and remembers important information
-                val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
+                val wineViewModel: WineViewModel = viewModel()
                 val navController = rememberNavController()
                 val lifecycleOwner = LocalLifecycleOwner.current
                 val snackbarHostState = remember { androidx.compose.material3.SnackbarHostState() }
@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
                 // Initialises analyzer
                 val analyzer = remember {
                     WineAnalyzer(
-                        textAnalysisViewModel,
+                        wineViewModel,
                         classifier = TfLiteWineClassifier(
                             context = applicationContext
                         )
@@ -104,7 +104,7 @@ class MainActivity : ComponentActivity() {
                     }
                 ) { innerPadding ->
                     // Starts the navigation
-                    Navigation(navController, controller, textAnalysisViewModel)
+                    Navigation(navController, controller, wineViewModel)
                 }
             }
         }

@@ -5,10 +5,6 @@ import androidx.annotation.OptIn
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.latin.TextRecognizerOptions
-import org.checkerframework.checker.fenum.qual.SwingElementOrientation
 
 /**
  * TextAnalyzer will analyse each frame for text which will be used to scrape websites for descriptions
@@ -16,7 +12,7 @@ import org.checkerframework.checker.fenum.qual.SwingElementOrientation
  */
 
 class WineAnalyzer(
-    private val viewModel: TextAnalysisViewModel,
+    private val viewModel: WineViewModel,
     private val classifier: WineClassifier,
     ) : ImageAnalysis.Analyzer {
     // Ensures doesn't go multiple times
