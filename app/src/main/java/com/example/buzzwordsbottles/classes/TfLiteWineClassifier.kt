@@ -14,7 +14,7 @@ class TfLiteWineClassifier(
     private val context: Context,
     // What score the scan needs to be
     private val threshold: Float = 0.5f,
-    private val maxResults: Int = 1
+    private val maxResults: Int = 3
 ): WineClassifier {
     private var classifier: ImageClassifier? = null
 
@@ -64,10 +64,10 @@ class TfLiteWineClassifier(
 
     private fun getOrientationFromRotation(rotation: Int): ImageProcessingOptions.Orientation{
         return when (rotation){
-            Surface.ROTATION_0 -> ImageProcessingOptions.Orientation.RIGHT_TOP
+            Surface.ROTATION_270 -> ImageProcessingOptions.Orientation.BOTTOM_RIGHT
             Surface.ROTATION_90 -> ImageProcessingOptions.Orientation.TOP_LEFT
             Surface.ROTATION_180 -> ImageProcessingOptions.Orientation.RIGHT_BOTTOM
-            else -> ImageProcessingOptions.Orientation.BOTTOM_RIGHT
+            else -> ImageProcessingOptions.Orientation.RIGHT_TOP
         }
     }
 
