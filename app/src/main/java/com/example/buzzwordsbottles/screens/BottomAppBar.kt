@@ -36,8 +36,6 @@ fun BottomAppBar(
 ) {
     // Initialises and remembers important information
     val context = LocalContext.current
-//    val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
-
 
     BottomAppBar(
         actions = {
@@ -56,11 +54,15 @@ fun BottomAppBar(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
+                    // Takes photo for imageProxy to feed into WineAnalyzer.kt
                     controller.takePicture(
                         ContextCompat.getMainExecutor(context),
+                        // Call back to when the image is captured
                         object : ImageCapture.OnImageCapturedCallback(){
                             override fun onCaptureSuccess(image: ImageProxy) {
+                                // Ensures that the analysis doesn't spam and goes more than once
                                 analyzer.frameSkipCounter = 0
+                                // Calls analysis on current imageProxy
                                 analyzer.analyze(image)
                                 super.onCaptureSuccess(image)
                             }
