@@ -9,16 +9,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import com.example.buzzwordsbottles.classes.Classification
 import com.example.buzzwordsbottles.classes.ObserveAsEvents
 import com.example.buzzwordsbottles.classes.SnackbarController
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
-import com.example.buzzwordsbottles.classes.TextAnalyzer
+import com.example.buzzwordsbottles.classes.TfLiteWineClassifier
+import com.example.buzzwordsbottles.classes.WineAnalyzer
 import com.example.buzzwordsbottles.screens.Navigation
 import com.example.compose.AppTheme
 import kotlinx.coroutines.launch
@@ -58,6 +63,22 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                var classifications by remember {
+                    mutableStateOf(emptyList<Classification>())
+                }
+
+                val analyzer = remember {
+                    WineAnalyzer(
+                        textAnalysisViewModel,
+                        classifier = TfLiteWineClassifier(
+                            context = applicationContext
+                        ),
+                        onResults = {
+                            classifications = it
+                        }
+                    )
+                }
+
 
                 // Initialises and applies the text analyzer class to the camera and enabled image analysis
                 val controller = remember {
@@ -65,7 +86,7 @@ class MainActivity : ComponentActivity() {
                         setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
                         setImageAnalysisAnalyzer(
                             ContextCompat.getMainExecutor(applicationContext),
-                            TextAnalyzer(textAnalysisViewModel)
+                            analyzer
                         )
                     }
                 }

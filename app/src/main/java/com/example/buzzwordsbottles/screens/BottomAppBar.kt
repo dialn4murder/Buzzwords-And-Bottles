@@ -11,20 +11,15 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.buzzwordsbottles.classes.TextAnalyzer
+import com.example.buzzwordsbottles.classes.WineAnalyzer
 import com.example.buzzwordsbottles.classes.NavRoute
 import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 
 @Composable
 fun BottomAppBar(
@@ -34,7 +29,7 @@ fun BottomAppBar(
     // Initialises and remembers important information
     val context = LocalContext.current
     val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
-    val analyzer = remember {TextAnalyzer(textAnalysisViewModel)}
+    val analyzer = remember {WineAnalyzer(textAnalysisViewModel)}
 
 
     BottomAppBar(
