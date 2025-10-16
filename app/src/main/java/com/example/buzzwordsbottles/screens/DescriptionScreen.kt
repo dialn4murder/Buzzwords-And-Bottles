@@ -12,7 +12,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -27,24 +30,11 @@ import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
 fun DescriptionsScreen(modifier: Modifier = Modifier, textAnalysisViewModel: TextAnalysisViewModel){
 
     val text = textAnalysisViewModel.scannedText.observeAsState(emptyList())
-
+    
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 384.dp)
+        columns = GridCells.Fixed(1)
     ) {
         items(text.value) { description->
-//            Box(
-//                modifier = modifier
-//                    .width(128.dp)
-//                    .height(128.dp)
-//                    .padding(2.dp)
-//                    .clip(RoundedCornerShape(5.dp))
-//                    .background(MaterialTheme.colorScheme.primaryContainer),
-//                contentAlignment = Alignment.Center
-//            ){
-//                Text(text = i.description,
-//                    color = MaterialTheme.colorScheme.onPrimary, style = MaterialTheme.typography.bodySmall)
-//
-//            }
             DescriptionCard(description)
         }
     }
