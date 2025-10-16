@@ -11,11 +11,11 @@ class TextAnalysisViewModel : ViewModel() {
 
     val scannedText: LiveData<List<Descriptions>> get() = _scannedText
 
-    fun setScannedText(text: String){
+    fun setScannedText(descriptions: Descriptions){
         // Null safety if the initial scanned text is empty
         val currentList = _scannedText.value ?: emptyList()
         // Adds the scanned text to the lazy list
-        _scannedText.value = currentList + Descriptions(text)
+        _scannedText.value = currentList + descriptions
         showSnackbar()
 
     }

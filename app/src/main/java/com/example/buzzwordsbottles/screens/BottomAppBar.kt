@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.ImageProxy
-import androidx.camera.core.takePicture
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
@@ -17,16 +16,11 @@ import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.buzzwordsbottles.classes.Classification
 import com.example.buzzwordsbottles.classes.WineAnalyzer
 import com.example.buzzwordsbottles.classes.NavRoute
-import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
-import kotlinx.coroutines.coroutineScope
 
 @Composable
 fun BottomAppBar(

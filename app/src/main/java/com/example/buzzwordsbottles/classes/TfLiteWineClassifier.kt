@@ -13,8 +13,9 @@ import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 class TfLiteWineClassifier(
     private val context: Context,
     // What score the scan needs to be
-    private val threshold: Float = 0.5f,
-    private val maxResults: Int = 3
+    private val threshold: Float = 0.75f,
+    // How many results an analysis will give
+    private val maxResults: Int = 1
 ): WineClassifier {
     private var classifier: ImageClassifier? = null
 
@@ -39,7 +40,7 @@ class TfLiteWineClassifier(
         }
     }
 
-    override fun classify(bitmap: Bitmap, rotation: Int): List<Classification> {
+    override fun classify(bitmap: Bitmap, rotation: Int): List<Descriptions> {
         if (classifier == null){
             setupClassifier()
         }
@@ -54,7 +55,7 @@ class TfLiteWineClassifier(
         val results = classifier?.classify(tensorImage, imageProcessingOptions)
         return results?.flatMap { classifications ->
             classifications.categories.map{ category ->
-                Classification(
+                Descriptions(
                     name = category.displayName,
                     score = category.score
                 )
