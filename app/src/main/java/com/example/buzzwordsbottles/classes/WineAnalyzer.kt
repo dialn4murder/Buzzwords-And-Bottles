@@ -18,7 +18,6 @@ import org.checkerframework.checker.fenum.qual.SwingElementOrientation
 class WineAnalyzer(
     private val viewModel: TextAnalysisViewModel,
     private val classifier: WineClassifier,
-    private val onResults: (List<Classification>) -> Unit
     ) : ImageAnalysis.Analyzer {
     // Ensures doesn't go multiple times
     var frameSkipCounter = 0
@@ -41,7 +40,6 @@ class WineAnalyzer(
 
             // Wine information stored into a List
             val results = classifier.classify(bitmap, rotationDegrees)
-            onResults(results)
 
             // Loops through the list and sends it to the viewmodel
             results.forEach { it

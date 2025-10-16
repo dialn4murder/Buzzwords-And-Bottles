@@ -65,19 +65,12 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-                var classifications by remember {
-                    mutableStateOf(emptyList<Classification>())
-                }
-
                 val analyzer = remember {
                     WineAnalyzer(
                         textAnalysisViewModel,
                         classifier = TfLiteWineClassifier(
                             context = applicationContext
-                        ),
-                        onResults = {
-                            classifications = it
-                        }
+                        )
                     )
                 }
 
