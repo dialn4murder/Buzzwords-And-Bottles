@@ -60,6 +60,7 @@ fun BottomAppBar(
                         ContextCompat.getMainExecutor(context),
                         object : ImageCapture.OnImageCapturedCallback(){
                             override fun onCaptureSuccess(image: ImageProxy) {
+                                analyzer.frameSkipCounter = 0
                                 analyzer.analyze(image)
                                 super.onCaptureSuccess(image)
                             }

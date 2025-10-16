@@ -23,7 +23,7 @@ class WineAnalyzer(
     // Initialises ML Kit
     private val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
 
-    private var frameSkipCounter = 0
+    var frameSkipCounter = 0
     var toggle = false
 
     /**
