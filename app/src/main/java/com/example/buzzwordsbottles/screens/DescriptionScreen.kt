@@ -1,7 +1,9 @@
 package com.example.buzzwordsbottles.screens
 
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -29,34 +31,37 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, wineViewModel: WineViewMod
     val text = wineViewModel.scannedText.observeAsState(emptyList())
     var expanded: (Boolean) -> Unit = { mutableStateOf(false) }
 
-    SearchBar(
-        inputField = {
-            SearchBarDefaults.InputField(
-                query = "Search",
-                onQueryChange = {
+    Box(modifier = Modifier.fillMaxSize()) {
+        SearchBar(
+            modifier = Modifier.align(Alignment.TopCenter),
+            inputField = {
+                SearchBarDefaults.InputField(
+                    query = "Search",
+                    onQueryChange = {
 
+                    },
+                    onSearch = {
+                        //TODO
+                    },
+                    expanded = false,
+                    onExpandedChange = expanded,
+                )
             },
-                onSearch = {
-                //TODO
-            },
-                expanded = true,
-                onExpandedChange = expanded,
-            )
-        },
-        expanded = true,
-        onExpandedChange = expanded,
-        shape = SearchBarDefaults.inputFieldShape,
-        tonalElevation = SearchBarDefaults.TonalElevation,
-        shadowElevation = SearchBarDefaults.ShadowElevation,
-        windowInsets = SearchBarDefaults.windowInsets,
-        content = { },
-    )
+            expanded = true,
+            onExpandedChange = expanded,
+            shape = SearchBarDefaults.inputFieldShape,
+            tonalElevation = SearchBarDefaults.TonalElevation,
+            shadowElevation = SearchBarDefaults.ShadowElevation,
+            windowInsets = SearchBarDefaults.windowInsets,
+            content = { },
+        )
 
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(1)
-    ) {
-        items(text.value) { description->
-            DescriptionCard(description)
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(1)
+        ) {
+            items(text.value) { description ->
+                DescriptionCard(description)
+            }
         }
     }
 
