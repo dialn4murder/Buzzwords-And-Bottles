@@ -13,9 +13,11 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -51,6 +53,9 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, wineViewModel: WineViewMod
 
             SearchBar(
                 modifier = Modifier.align(Alignment.TopCenter),
+                colors = SearchBarDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                ),
                 inputField = {
                     SearchBarDefaults.InputField(
                         query = "Search",
@@ -64,6 +69,7 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, wineViewModel: WineViewMod
                         onExpandedChange = expanded,
                     )
                 },
+
                 expanded = false,
                 onExpandedChange = expanded,
                 shape = SearchBarDefaults.inputFieldShape,

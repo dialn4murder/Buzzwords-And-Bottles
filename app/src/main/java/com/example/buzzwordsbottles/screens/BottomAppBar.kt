@@ -34,8 +34,8 @@ fun BottomAppBar(
     val context = LocalContext.current
 
     BottomAppBar(
-        containerColor = MaterialTheme.colorScheme.surface,
-        contentColor = MaterialTheme.colorScheme.onSurface,
+        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         actions = {
             // Camera and description buttons
             IconButton(onClick = { navController.navigate(NavRoute.Camera.name) }) {
@@ -80,7 +80,7 @@ fun BottomAppBar(
                     )
 
                 },
-                containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
+                containerColor = MaterialTheme.colorScheme.tertiary,
                 elevation = FloatingActionButtonDefaults.bottomAppBarFabElevation()
             ) {
                 Icon(Icons.Filled.Add, "Localized description")
