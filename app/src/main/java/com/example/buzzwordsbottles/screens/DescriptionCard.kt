@@ -24,7 +24,7 @@ fun DescriptionCard(description: Descriptions){
 
     ) {
         Text(
-            text = description.name,
+            text = description.title,
             modifier = Modifier
                 .padding(16.dp),
             textAlign = TextAlign.Center,

@@ -39,8 +39,8 @@ class WineAnalyzer(
 
             // Loops through the list and sends it to the viewmodel
             results.forEach { it
-                Log.d("scan", it.name)
-                viewModel.setScannedText(Descriptions(it.name, it.score))
+                Log.d("scan", it.title)
+                viewModel.setScannedText(Descriptions(it.description, it.title, it.score))
             }
 
             imageProxy.close()

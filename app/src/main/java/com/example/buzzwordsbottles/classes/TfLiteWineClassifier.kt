@@ -56,11 +56,12 @@ class TfLiteWineClassifier(
         return results?.flatMap { classifications ->
             classifications.categories.map{ category ->
                 Descriptions(
-                    name = category.displayName,
-                    score = category.score
+                    description = category.displayName,
+                    score = category.score,
+                    title = ""
                 )
             }
-        }?.distinctBy { it.name } ?: emptyList()
+        }?.distinctBy { it.title } ?: emptyList()
     }
 
     private fun getOrientationFromRotation(rotation: Int): ImageProcessingOptions.Orientation{
