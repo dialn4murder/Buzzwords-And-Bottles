@@ -13,7 +13,7 @@ import org.tensorflow.lite.task.vision.classifier.ImageClassifier
 class TfLiteWineClassifier(
     private val context: Context,
     // What score the scan needs to be
-    private val threshold: Float = 0.75f,
+    private val threshold: Float = 0.5f,
     // How many results an analysis will give
     private val maxResults: Int = 1
 ): WineClassifier {
@@ -56,11 +56,12 @@ class TfLiteWineClassifier(
         return results?.flatMap { classifications ->
             classifications.categories.map{ category ->
                 Descriptions(
-                    name = category.displayName,
-                    score = category.score
+                    description = category.displayName,
+                    score = category.score,
+                    title = ""
                 )
             }
-        }?.distinctBy { it.name } ?: emptyList()
+        }?.distinctBy { it.title } ?: emptyList()
     }
 
     private fun getOrientationFromRotation(rotation: Int): ImageProcessingOptions.Orientation{

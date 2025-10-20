@@ -1,6 +1,5 @@
 package com.example.buzzwordsbottles.classes
 
-import android.util.Log
 import androidx.annotation.OptIn
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
@@ -39,41 +38,12 @@ class WineAnalyzer(
 
             // Loops through the list and sends it to the viewmodel
             results.forEach { it
-                Log.d("scan", it.name)
-                viewModel.setScannedText(Descriptions(it.name, it.score))
+                viewModel.setScannedText(Descriptions(it.description, it.title, it.score))
             }
 
             imageProxy.close()
         }
         frameSkipCounter++
-
-//        // Checks if analysis has finished
-//        if (!toggle){
-//            imageProxy.close()
-//            return
-//        }
-//
-//        toggle = false
-//
-//        // Current frame to be analyzed if null return
-//        val mediaImage = imageProxy.image ?: return
-//        val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-//
-//
-//        recognizer.process(image)
-//            .addOnSuccessListener { visionText ->
-//                var text = ""
-//                for (block in visionText.textBlocks) {
-//                    text += block.text
-//                    Log.d("Scanned Text", block.text)
-//                }
-//                viewModel.setScannedText(text)
-//
-//            }
-//            .addOnCompleteListener {
-//                imageProxy.close()
-//            }
-//
         }
 
 }
