@@ -7,8 +7,10 @@ import androidx.camera.core.ImageProxy
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
+import androidx.compose.material.icons.automirrored.filled.More
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.FloatingActionButton
@@ -35,11 +37,18 @@ fun BottomAppBar(
         actions = {
             // Camera and description buttons
             IconButton(onClick = { navController.navigate(NavRoute.Camera.name) }) {
-                Icon(Icons.Filled.CameraAlt, contentDescription = "Localized description")
+                Icon(Icons.Filled.CameraAlt,
+                    contentDescription = "Localized description")
             }
             IconButton(onClick = { navController.navigate(NavRoute.Descriptions.name) }) {
                 Icon(
                     Icons.AutoMirrored.Filled.FormatListBulleted,
+                    contentDescription = "Localized description",
+                )
+            }
+            IconButton(onClick = {  }) {
+                Icon(
+                    Icons.Filled.Settings,
                     contentDescription = "Localized description",
                 )
             }
