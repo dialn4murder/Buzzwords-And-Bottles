@@ -26,19 +26,19 @@ fun DescriptionCard(description: Descriptions){
     ) {
 
         Column{
-        Text(
-            text = description.title,
-            modifier = Modifier
-                .padding(3.dp),
-            textAlign = TextAlign.Center,
-        )
-        Text(
-            text = description.description,
-            modifier = Modifier
-                .padding(3.dp),
-            textAlign = TextAlign.Center,
-        )
-            }
+            Text(
+                text = description.title,
+                modifier = Modifier
+                    .padding(3.dp),
+                textAlign = TextAlign.Center,
+            )
+            Text(
+                text = description.description,
+                modifier = Modifier
+                    .padding(3.dp),
+                textAlign = TextAlign.Center,
+            )
+        }
     }
 
 }
