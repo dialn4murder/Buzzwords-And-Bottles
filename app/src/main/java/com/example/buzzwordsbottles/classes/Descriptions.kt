@@ -13,11 +13,11 @@ class Descriptions(
     private fun assignName(): String{
         var nameReturn = ""
 
-        if (description.length < 6){
+        if (description.length < 15){
             return description
         }
 
-        for (i in 0..5){
+        for (i in 0..14){
             nameReturn += description[i]
         }
 

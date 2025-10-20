@@ -1,5 +1,6 @@
 package com.example.buzzwordsbottles.screens
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CardDefaults
@@ -23,12 +24,21 @@ fun DescriptionCard(description: Descriptions){
             .padding(6.dp)
 
     ) {
+
+        Column{
         Text(
             text = description.title,
             modifier = Modifier
-                .padding(16.dp),
+                .padding(3.dp),
             textAlign = TextAlign.Center,
         )
+        Text(
+            text = description.description,
+            modifier = Modifier
+                .padding(3.dp),
+            textAlign = TextAlign.Center,
+        )
+            }
     }
 
 }
