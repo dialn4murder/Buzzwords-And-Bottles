@@ -15,7 +15,12 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
-import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
+import com.example.buzzwordsbottles.classes.ObserveAsEvents
+import com.example.buzzwordsbottles.classes.SnackbarController
+import com.example.buzzwordsbottles.classes.WineViewModel
+import com.example.buzzwordsbottles.classes.TfLiteWineClassifier
+import com.example.buzzwordsbottles.classes.WineAnalyzer
+import com.example.buzzwordsbottles.screens.Navigation
 import com.example.compose.AppTheme
 import kotlinx.coroutines.launch
 
@@ -29,14 +34,17 @@ class MainActivity : ComponentActivity() {
             // Enables custom M3 generated colour theme
             AppTheme(dynamicColor = false) {
                 // Initialises and remembers important information
-                val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
+                val wineViewModel: WineViewModel = viewModel()
                 val navController = rememberNavController()
                 val lifecycleOwner = LocalLifecycleOwner.current
                 val snackbarHostState = remember { androidx.compose.material3.SnackbarHostState() }
                 val coroutine = rememberCoroutineScope()
 
-                ObserveAsEvents(flow = SnackbarController.events,
-                    snackbarHostState) { event ->
+                // Observes if there are any snack bars to be made
+                ObserveAsEvents(
+                    flow = SnackbarController.events,
+                    snackbarHostState
+                ) { event ->
                     coroutine.launch {
                         snackbarHostState.currentSnackbarData?.dismiss()
 
@@ -46,10 +54,20 @@ class MainActivity : ComponentActivity() {
                             duration = SnackbarDuration.Short
                         )
 
-                        if (result == SnackbarResult.ActionPerformed){
+                        if (result == SnackbarResult.ActionPerformed) {
                             event.action?.action?.invoke()
                         }
                     }
+                }
+
+                // Initialises analyzer
+                val analyzer = remember {
+                    WineAnalyzer(
+                        wineViewModel,
+                        classifier = TfLiteWineClassifier(
+                            context = applicationContext
+                        )
+                    )
                 }
 
 
@@ -57,16 +75,18 @@ class MainActivity : ComponentActivity() {
                 val controller = remember {
                     LifecycleCameraController(applicationContext).apply {
                         setEnabledUseCases(CameraController.IMAGE_ANALYSIS)
+                        setEnabledUseCases(CameraController.IMAGE_CAPTURE)
                         setImageAnalysisAnalyzer(
                             ContextCompat.getMainExecutor(applicationContext),
-                            TextAnalyzer(textAnalysisViewModel)
+                            analyzer
                         )
+
                     }
                 }
 
                 // Binds the camera
                 LaunchedEffect(controller) {
-                    controller.bindToLifecycle(lifecycleOwner)
+                    controller.bindToLifecycle(lifecycleOwner )
                 }
 
                 Scaffold(
@@ -79,12 +99,12 @@ class MainActivity : ComponentActivity() {
                         com.example.buzzwordsbottles.screens.BottomAppBar(
                             navController,
                             controller,
-
+                            analyzer
                         )
                     }
                 ) { innerPadding ->
                     // Starts the navigation
-                    Navigation(navController, controller, textAnalysisViewModel)
+                    Navigation(navController, controller, wineViewModel)
                 }
             }
         }

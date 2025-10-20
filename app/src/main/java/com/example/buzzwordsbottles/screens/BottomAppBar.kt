@@ -1,5 +1,9 @@
 package com.example.buzzwordsbottles.screens
 
+import android.util.Log
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.core.ImageProxy
 import androidx.camera.view.LifecycleCameraController
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.FormatListBulleted
@@ -11,31 +15,21 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.SnackbarDuration
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.buzzwordsbottles.TextAnalyzer
+import com.example.buzzwordsbottles.classes.WineAnalyzer
 import com.example.buzzwordsbottles.classes.NavRoute
-import com.example.buzzwordsbottles.classes.TextAnalysisViewModel
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 
 @Composable
 fun BottomAppBar(
     navController: NavHostController,
     controller: LifecycleCameraController,
+    analyzer: WineAnalyzer
 ) {
     // Initialises and remembers important information
     val context = LocalContext.current
-    val textAnalysisViewModel: TextAnalysisViewModel = viewModel()
-    val analyzer = remember {TextAnalyzer(textAnalysisViewModel)}
-
 
     BottomAppBar(
         actions = {
@@ -54,11 +48,25 @@ fun BottomAppBar(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    controller.setImageAnalysisAnalyzer(
+                    // Takes photo for imageProxy to feed into WineAnalyzer.kt
+                    controller.takePicture(
                         ContextCompat.getMainExecutor(context),
-                        analyzer
+                        // Call back to when the image is captured
+                        object : ImageCapture.OnImageCapturedCallback(){
+                            override fun onCaptureSuccess(image: ImageProxy) {
+                                // Ensures that the analysis doesn't spam and goes more than once
+                                analyzer.frameSkipCounter = 0
+                                // Calls analysis on current imageProxy
+                                analyzer.analyze(image)
+                                super.onCaptureSuccess(image)
+                            }
+
+                            override fun onError(exception: ImageCaptureException) {
+                                Log.d("Camera", "Error taking photo")
+                                super.onError(exception)
+                            }
+                        }
                     )
-                    analyzer.toggle = true
 
                 },
                 containerColor = BottomAppBarDefaults.bottomAppBarFabColor,
