@@ -16,6 +16,7 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.ContextCompat
@@ -33,6 +34,8 @@ fun BottomAppBar(
     val context = LocalContext.current
 
     BottomAppBar(
+        containerColor = MaterialTheme.colorScheme.surface,
+        contentColor = MaterialTheme.colorScheme.onSurface,
         actions = {
             // Camera and description buttons
             IconButton(onClick = { navController.navigate(NavRoute.Camera.name) }) {
