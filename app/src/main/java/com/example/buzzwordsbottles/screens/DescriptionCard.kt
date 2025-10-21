@@ -51,12 +51,14 @@ fun DescriptionCard(description: Descriptions){
                 .fillMaxSize()
                 .weight(1f)) {
                 Text(
+                    style = MaterialTheme.typography.titleLarge,
                     text = description.title,
                     modifier = Modifier
                         .padding(3.dp),
                     textAlign = TextAlign.Start,
                 )
                 Text(
+                    style = MaterialTheme.typography.bodySmall,
                     text = description.description,
                     modifier = Modifier
                         .padding(3.dp),
