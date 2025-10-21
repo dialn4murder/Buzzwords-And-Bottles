@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,40 +30,41 @@ fun DescriptionCard(description: Descriptions){
             defaultElevation = 6.dp
         ),
         modifier = Modifier
-            .size(width = 240.dp, height = 100.dp)
-            .padding(6.dp),
+            .fillMaxWidth()
+            .padding(12.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer)
 
         ) {
 
-        Column{
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.Top
-            ) {
-                Text(
-                    text = description.title,
-                    modifier = Modifier
-                        .padding(3.dp),
-                    textAlign = TextAlign.Start,
-                )
-                Image(
-                    painter = painterResource(R.drawable.wine),
-                    contentDescription = "Wine Icon",
 
-                )
-            }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.Top
+        ) {
+            Column {
+            Text(
+                text = description.title,
+                modifier = Modifier
+                    .padding(3.dp),
+                textAlign = TextAlign.Start,
+            )
             Text(
                 text = description.description,
                 modifier = Modifier
                     .padding(3.dp),
                 textAlign = TextAlign.Start,
             )
+                }
+            Image(
+                painter = painterResource(R.drawable.wine),
+                contentDescription = "Wine Icon",
+            )
         }
     }
+
 
 }
