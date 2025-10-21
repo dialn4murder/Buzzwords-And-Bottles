@@ -48,14 +48,10 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, wineViewModel: WineViewMod
         horizontalAlignment = Alignment.CenterHorizontally
     ){
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
-        ) {
+
 
             SearchBar(
-                modifier = Modifier.align(Alignment.TopCenter),
+                modifier = Modifier.align(Alignment.CenterHorizontally),
                 colors = SearchBarDefaults.colors(
                     containerColor = MaterialTheme.colorScheme.surfaceVariant,
                     dividerColor = MaterialTheme.colorScheme.surfaceVariant
@@ -83,7 +79,7 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, wineViewModel: WineViewMod
                 windowInsets = SearchBarDefaults.windowInsets,
                 content = { },
             )
-        }
+
 
         LazyVerticalGrid(
             modifier = Modifier
