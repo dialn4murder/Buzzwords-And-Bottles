@@ -1,6 +1,7 @@
 package com.example.buzzwordsbottles.screens
 
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -60,8 +61,17 @@ fun DescriptionsScreen(wineViewModel: WineViewModel){
                         }
                     },
                     onSearch = {
-                        search = textFieldState.text.toString()
-                        expanded = false
+                        search = it
+                        wineViewModel.clearSearchedText()
+                        val filteredList = wine.value.filter { wineFromList ->
+                            wineFromList.title.contains(search)
+                        }
+
+                        for (wine in filteredList){
+                            Log.d("wine", wine.title)
+                            wineViewModel.setSearchedText(wine)
+                        }
+
                     },
                     expanded = expanded,
                     onExpandedChange = { expanded = it},
@@ -73,15 +83,12 @@ fun DescriptionsScreen(wineViewModel: WineViewModel){
             onExpandedChange = { it : Boolean ->
                 expanded = it}
         ){
-            var filteredList = wine.value.filter {
-                it.description.contains(search)
-            }
             LazyVerticalGrid(
                 modifier = Modifier
                     .padding(6.dp),
                 columns = GridCells.Fixed(1)
             ) {
-                items(filteredList) { description ->
+                items(wineViewModel.searchedText.value ?: wine.value) { description ->
                     DescriptionCard(description)
                 }
             }
