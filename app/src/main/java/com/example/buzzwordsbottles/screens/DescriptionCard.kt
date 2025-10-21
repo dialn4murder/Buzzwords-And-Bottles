@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -15,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,7 +47,9 @@ fun DescriptionCard(description: Descriptions){
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.Top
         ) {
-            Column {
+            Column(modifier = Modifier
+                .fillMaxSize()
+                .weight(1f)) {
                 Text(
                     text = description.title,
                     modifier = Modifier
@@ -62,6 +66,10 @@ fun DescriptionCard(description: Descriptions){
             Image(
                 painter = painterResource(R.drawable.wine),
                 contentDescription = "Wine Icon",
+                modifier = Modifier
+                    .size(height = 150.dp, width = 75.dp)
+                    .align(Alignment.CenterVertically),
+                contentScale = ContentScale.FillBounds
             )
         }
     }

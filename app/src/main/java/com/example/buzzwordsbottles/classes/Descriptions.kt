@@ -9,7 +9,9 @@ class Descriptions(
 ){
 
     init {
-        title = assignName()
+        if (title.isEmpty()) {
+            title = assignName()
+        }
     }
 
     private fun assignName(): String{
