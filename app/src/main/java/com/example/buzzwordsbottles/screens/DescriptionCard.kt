@@ -46,19 +46,19 @@ fun DescriptionCard(description: Descriptions){
             verticalAlignment = Alignment.Top
         ) {
             Column {
-            Text(
-                text = description.title,
-                modifier = Modifier
-                    .padding(3.dp),
-                textAlign = TextAlign.Start,
-            )
-            Text(
-                text = description.description,
-                modifier = Modifier
-                    .padding(3.dp),
-                textAlign = TextAlign.Start,
-            )
-                }
+                Text(
+                    text = description.title,
+                    modifier = Modifier
+                        .padding(3.dp),
+                    textAlign = TextAlign.Start,
+                )
+                Text(
+                    text = description.description,
+                    modifier = Modifier
+                        .padding(3.dp),
+                    textAlign = TextAlign.Start,
+                )
+            }
             Image(
                 painter = painterResource(R.drawable.wine),
                 contentDescription = "Wine Icon",
