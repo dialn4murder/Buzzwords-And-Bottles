@@ -24,8 +24,8 @@ fun DescriptionCard(description: Descriptions){
             .size(width = 240.dp, height = 100.dp)
             .padding(6.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer)
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.onPrimaryContainer)
 
         ) {
 

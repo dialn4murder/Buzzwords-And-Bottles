@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
@@ -31,6 +32,7 @@ import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import com.example.buzzwordsbottles.classes.Descriptions
 import com.example.buzzwordsbottles.classes.WineViewModel
+import com.example.compose.outlineVariantLight
 import com.google.android.material.search.SearchBar
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,7 +56,9 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, wineViewModel: WineViewMod
             SearchBar(
                 modifier = Modifier.align(Alignment.TopCenter),
                 colors = SearchBarDefaults.colors(
-                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                    dividerColor = MaterialTheme.colorScheme.surfaceVariant
+
                 ),
                 inputField = {
                     SearchBarDefaults.InputField(
@@ -66,7 +70,7 @@ fun DescriptionsScreen(modifier: Modifier = Modifier, wineViewModel: WineViewMod
                             //TODO
                         },
                         expanded = true,
-                        onExpandedChange = expanded,
+                        onExpandedChange = expanded
                     )
                 },
 
