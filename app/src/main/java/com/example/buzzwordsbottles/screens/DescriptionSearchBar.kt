@@ -27,8 +27,8 @@ fun ColumnScope.DescriptionSearchBar(
 ) {
     val searchedList by wineViewModel.searchedText.observeAsState()
 
-    var textFieldState = rememberTextFieldState()
-    var search = ""
+    val textFieldState = rememberTextFieldState()
+
     var expanded by rememberSaveable { mutableStateOf(false) }
 
     SearchBar(
@@ -48,7 +48,7 @@ fun ColumnScope.DescriptionSearchBar(
                         replace(0, length, it)
                     }
                     wineViewModel.clearSearchedText()
-                    wineViewModel.filterList(it)
+                    wineViewModel.filterList(textFieldState.text.toString())
                 },
                 onSearch = {
 
