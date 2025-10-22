@@ -91,6 +91,18 @@ class WineViewModel : ViewModel() {
         }
     }
 
+    fun filterList(searchItem: String){
+        val filteredList = _scannedText.value?.filter { wineFromList ->
+            wineFromList.title.contains(searchItem)
+        }
+
+        if (filteredList != null) {
+            for (wine in filteredList) {
+                setSearchedText(wine)
+            }
+        }
+    }
+
     fun showSnackbar(){
         viewModelScope.launch {
             SnackbarController.sendEvent(
