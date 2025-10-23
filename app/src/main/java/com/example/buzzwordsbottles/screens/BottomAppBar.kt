@@ -34,8 +34,8 @@ fun BottomAppBar(
     val context = LocalContext.current
 
     BottomAppBar(
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
         actions = {
             // Camera and description buttons
             IconButton(onClick = { navController.navigate(NavRoute.Camera.name) }) {
